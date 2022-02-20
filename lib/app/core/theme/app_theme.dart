@@ -6,6 +6,7 @@ class AppTheme {
   static const Color midGreyColor = Color(0xff6D6D6E);
   static const Color smokeWhiteColor = Color(0xffE5E5E5);
   static const Color primaryBlackColor = Color(0xff141414);
+  static const Color darkGrey = Color(0xff8C8787);
 
   const AppTheme._();
 
