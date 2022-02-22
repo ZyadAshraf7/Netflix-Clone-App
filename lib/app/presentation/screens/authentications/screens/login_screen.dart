@@ -84,6 +84,7 @@ class LoginScreen extends StatelessWidget {
                           "assets/images/NetflixLogo.svg",
                           height: 70,
                           width: 272,
+                          color: AppTheme.redPrimaryColor,
                         ),
                         const SizedBox(height: 16),
                         const Text(
@@ -92,6 +93,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 28),
                         CustomTextFormField(
+                          focusNode: loginCubit.emailFocusNode,
                           hintText: "Email Address",
                           title: "Email",
                           isPasswordField: false,
@@ -99,6 +101,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 17),
                         CustomTextFormField(
+                          focusNode: loginCubit.passwordFocusNode,
                           hintText: "Password",
                           title: "Password",
                           isPasswordVisible: loginCubit.isPasswordVisible,
@@ -127,6 +130,8 @@ class LoginScreen extends StatelessWidget {
                             function: () {
                               final validationResult = loginCubit.loginValidation();
                               if (validationResult) {
+                                loginCubit.emailFocusNode.requestFocus(FocusNode());
+                                loginCubit.passwordFocusNode.requestFocus(FocusNode());
                                 loginCubit.loginUser(
                                   email: loginCubit.emailController.text,
                                   password: loginCubit.passwordController.text,
@@ -141,10 +146,10 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         separator(),
                         const SizedBox(height: 20),
-                        socialMediaLogin(),
+                        const SocialMediaLogin(),
                         const SizedBox(height: 25),
                         doesHaveAccount(
-                          title: "Don’t Have An Account? ",
+                          title: "Don’t Have An Account?  ",
                           subtitle: "Sign Up",
                           function: () {
                             Navigator.of(context).pushNamed(RouteNames.registerScreen);

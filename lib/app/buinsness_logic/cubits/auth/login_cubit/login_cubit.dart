@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:netflix_app/app/data/repositories/authentication/login_repository.dart';
 import 'package:netflix_app/app/data/shared_preference/shared_preference.dart';
 import 'package:netflix_app/app/data/shared_preference/user_preference.dart';
-import 'package:netflix_app/app/presentation/widgets/custom_snackbar.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 part 'login_state.dart';
 
@@ -23,6 +23,8 @@ class LoginCubit extends Cubit<LoginState> {
   bool isPasswordVisible = true;
   String errorMessage = "";
   bool valid = true;
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
 
   void changePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
@@ -56,6 +58,36 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginError());
       errorMessage = e.toString();
       errorLoginMessage();
+    }
+  }
+
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+        UserPreferences.setUserToken(googleAuth!.idToken!);
+        print(googleAuth.idToken);
+        UserPreferences.setUserVerification(true);
+        return value;
+      });
+      print(userCredential.user!.email);
+      return userCredential;
+    }catch(e){
+      print(e.toString());
+      throw Exception();
     }
   }
 
@@ -95,6 +127,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> close() {
     emailController.dispose();
     passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     return super.close();
   }
 }

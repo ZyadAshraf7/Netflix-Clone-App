@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final String title;
   final bool isPasswordField;
   final bool isPasswordVisible;
+  final FocusNode focusNode;
   final bool ? hasBorder;
   TextEditingController? textEditingController;
   VoidCallback? changePasswordVisibility;
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.title,
     required this.isPasswordField,
+    required this.focusNode,
     this.hasBorder=false,
     required this.textEditingController,
     this.isPasswordVisible = false,
@@ -37,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
           height: 53,
           width: 310,
           child: TextFormField(
+            focusNode: focusNode,
             cursorColor: AppTheme.midGreyColor,
             textAlignVertical: TextAlignVertical.center,
             controller: textEditingController,

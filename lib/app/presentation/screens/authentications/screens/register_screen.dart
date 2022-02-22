@@ -85,6 +85,7 @@ class RegisterScreen extends StatelessWidget {
                           "assets/images/NetflixLogo.svg",
                           height: 70,
                           width: 272,
+                          color: AppTheme.redPrimaryColor,
                         ),
                         const SizedBox(height: 16),
                         const Text(
@@ -93,6 +94,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 28),
                         CustomTextFormField(
+                          focusNode: registerCubit.emailFocusNode,
                           hintText: "Email Address",
                           title: "Email",
                           isPasswordField: false,
@@ -100,6 +102,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 17),
                         CustomTextFormField(
+                          focusNode: registerCubit.passwordFocusNode,
                           hintText: "Password",
                           title: "Password",
                           isPasswordVisible: registerCubit.isPasswordVisible,
@@ -109,6 +112,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 17),
                         CustomTextFormField(
+                          focusNode: registerCubit.confirmPasswordFocusNode,
                           hintText: "Confirm Password",
                           title: "Confirm Password",
                           isPasswordVisible: registerCubit.isRePasswordVisible,
@@ -138,10 +142,12 @@ class RegisterScreen extends StatelessWidget {
                                 function: () {
                                   final validationResult = registerCubit.validateForm();
                                   if (validationResult) {
-                                    print("valid");
+                                    registerCubit.emailFocusNode.requestFocus(FocusNode());
+                                    registerCubit.passwordFocusNode.requestFocus(FocusNode());
+                                    registerCubit.confirmPasswordFocusNode.requestFocus(FocusNode());
                                     BlocProvider.value(
                                       value: registerCubit,
-                                      child: EmailVerificationScreen(),
+                                      child: const EmailVerificationScreen(),
                                     );
                                     registerCubit.registerUser(
                                       email: registerCubit.emailController.text,
@@ -157,10 +163,10 @@ class RegisterScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         separator(),
                         const SizedBox(height: 20),
-                        socialMediaLogin(),
+                        const SocialMediaLogin(),
                         const SizedBox(height: 35),
                         doesHaveAccount(
-                          title: "Already Have An Account? ",
+                          title: "Already Have An Account?  ",
                           subtitle: "Login",
                           function: () {
                             Navigator.of(context).pushReplacementNamed(RouteNames.loginScreen);

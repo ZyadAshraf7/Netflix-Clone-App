@@ -11,7 +11,7 @@ Widget separator() {
       ),
       const SizedBox(width: 16),
       const Text(
-        "Or Login With",
+        "Login with",
         style: TextStyle(
           color: Colors.white,
           fontSize: 16,

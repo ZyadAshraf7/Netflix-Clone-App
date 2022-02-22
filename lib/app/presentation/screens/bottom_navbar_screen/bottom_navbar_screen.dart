@@ -15,12 +15,14 @@ class BottomNavBarScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: bottomNavBarCubit.screens[bottomNavBarCubit.currentIndex],
-          bottomNavigationBar: Container(
+          bottomNavigationBar: SizedBox(
             height: MediaQuery.of(context).size.height*0.1,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(16),
+                topLeft: Radius.circular(16),
+              ),
               child: BottomNavigationBar(
-
                 selectedItemColor: Colors.white,
                 unselectedItemColor: AppTheme.darkGrey,
                 type: BottomNavigationBarType.fixed,

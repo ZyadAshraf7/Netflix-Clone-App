@@ -21,6 +21,9 @@ class RegisterCubit extends Cubit<RegisterState> {
   bool isRePasswordVisible = true;
   bool valid = true;
   late String oobCode;
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+  FocusNode confirmPasswordFocusNode = FocusNode();
 
   void changePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
@@ -151,5 +154,15 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void init() {
     formKey = GlobalKey<FormState>();
+  }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    confirmPasswordFocusNode.dispose();
+    return super.close();
   }
 }
