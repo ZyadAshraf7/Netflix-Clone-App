@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/previews_avatars.dart';
 import 'widgets/movies_box.dart';
 
@@ -49,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      const HomePoster(),
+                      //const HomePoster(),
+                      PosterShimmer(),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
