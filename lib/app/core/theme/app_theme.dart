@@ -13,7 +13,7 @@ class AppTheme {
   static final appThemeMode = ThemeData(
     scaffoldBackgroundColor: primaryBlackColor,
     fontFamily: 'SFProDisplay',
-    platform: TargetPlatform.iOS,
+    //platform: TargetPlatform.iOS,
     accentColor: midGreyColor
   );
 }

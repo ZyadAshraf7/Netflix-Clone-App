@@ -9,7 +9,7 @@ Widget iconBox({required String title, required String iconPath, required VoidCa
         SvgPicture.asset(iconPath,width: 24,height: 24,),
         Text(
           title,
-          style: const TextStyle(fontSize: 14, color: Colors.white),
+          style: const TextStyle(fontSize: 12, color: Colors.white60),
         ),
       ],
     ),

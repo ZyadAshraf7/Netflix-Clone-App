@@ -5,6 +5,7 @@ import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/data/repositories/authentication/register_repository.dart';
 import 'package:netflix_app/app/data/shared_preference/shared_preference.dart';
+import 'package:netflix_app/app/data/shared_preference/user_preference.dart';
 import 'package:netflix_app/app/presentation/routing/app_router.dart';
 import 'package:netflix_app/netlix.dart';
 
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await SharedPrefs.init();
+  print("token in main :${UserPreferences.getUserToken()}");
   runApp(
     NetflixApp(
       appRouter: AppRouter(),

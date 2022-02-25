@@ -20,8 +20,8 @@ class BottomNavIcon extends StatelessWidget {
       children: [
         SvgPicture.asset(
           iconPath,
-          height: 24,
-          width: 24,
+          height: 20,
+          width: 20,
           color: isSelected ? Colors.white : AppTheme.darkGrey,
         ),
        /* Text(

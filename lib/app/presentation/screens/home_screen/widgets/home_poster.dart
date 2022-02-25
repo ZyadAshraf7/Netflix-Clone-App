@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'app_bar.dart';
 import 'play_button_and_icon_box.dart';
 
-class HomePosterAndAppBar extends StatelessWidget {
-  const HomePosterAndAppBar({Key? key}) : super(key: key);
+class HomePoster extends StatelessWidget {
+  const HomePoster({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,9 @@ class HomePosterAndAppBar extends StatelessWidget {
       children: [
         SizedBox(
           width: size.width,
-          height: 400,
+          height: 600,
           child: Image.asset(
-            "assets/images/poster.png",
+            "assets/images/poster.jpg",
             fit: BoxFit.cover,
           ),
         ),
@@ -25,10 +25,15 @@ class HomePosterAndAppBar extends StatelessWidget {
           child: Container(
             height: 120,
             decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black54, Colors.black])),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.black54, Colors.black],
+              ),
+            ),
           ),
         ),
-        homeAppBar(context),
+        //const HomeAppBar(),
         Column(
           children: [
             Row(
@@ -38,7 +43,7 @@ class HomePosterAndAppBar extends StatelessWidget {
                   width: 23,
                   height: 23,
                   child: SvgPicture.asset(
-                    "assets/images/icons/top10.svg",
+                    "assets/images/icons/Top10Badge.svg",
                   ),
                 ),
                 const SizedBox(width: 10),

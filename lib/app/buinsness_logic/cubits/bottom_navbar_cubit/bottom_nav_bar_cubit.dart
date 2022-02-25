@@ -18,7 +18,6 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
     const EmailVerificationScreen(),
     const RegisterScreen(),
     const EmailVerificationScreen(),
-    const HomeScreen(),
   ];
   void navigateScreens(int index){
     currentIndex=index;

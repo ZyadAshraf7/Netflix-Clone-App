@@ -33,7 +33,7 @@ class NetflixApp extends StatelessWidget {
           theme: AppTheme.appThemeMode,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: appRouter!.onGenerateRoutes,
-          initialRoute: (UserPreferences.getUserToken() != 'error token' && UserPreferences.getUserVerification() == true)
+          initialRoute: ((UserPreferences.getUserToken() !="") && UserPreferences.getUserVerification() == true)
               ? RouteNames.bottomNavBarScreen
               : RouteNames.loginScreen,
         ),

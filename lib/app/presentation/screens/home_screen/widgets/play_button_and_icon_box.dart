@@ -9,7 +9,7 @@ Widget homePlayButtonAndIconsBox(){
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         iconBox(title: "My List", iconPath: "assets/images/icons/plus.svg", onTap: (){}),
-        playButton(),
+        const PlayButton(),
         iconBox(title: "Info", iconPath: "assets/images/icons/info.svg", onTap: (){}),
       ],
     ),

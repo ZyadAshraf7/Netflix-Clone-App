@@ -114,7 +114,9 @@ class LoginScreen extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, RouteNames.forgetPasswordScreen);
+                              },
                               child: const Text(
                                 "Forgot Password ?",
                                 style: TextStyle(fontSize: 13, color: AppTheme.greyColor),

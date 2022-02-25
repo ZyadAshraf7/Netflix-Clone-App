@@ -15,14 +15,16 @@ class BottomNavBarScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: bottomNavBarCubit.screens[bottomNavBarCubit.currentIndex],
-          bottomNavigationBar: SizedBox(
-            height: MediaQuery.of(context).size.height*0.1,
+          bottomNavigationBar: Container(
+            padding: EdgeInsets.only(bottom: 5,top: 1),
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 topLeft: Radius.circular(16),
               ),
               child: BottomNavigationBar(
+                selectedFontSize: 12,
+                unselectedFontSize:10 ,
                 selectedItemColor: Colors.white,
                 unselectedItemColor: AppTheme.darkGrey,
                 type: BottomNavigationBarType.fixed,
@@ -57,13 +59,6 @@ class BottomNavBarScreen extends StatelessWidget {
                     icon: BottomNavIcon(
                       iconPath: 'assets/images/icons/download.svg',
                       isSelected: bottomNavBarCubit.currentIndex == 3,
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    label: 'More',
-                    icon: BottomNavIcon(
-                      iconPath: 'assets/images/icons/more.svg',
-                      isSelected: bottomNavBarCubit.currentIndex == 4,
                     ),
                   ),
                 ],
