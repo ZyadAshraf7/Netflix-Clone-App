@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/previews_avatars.dart';
 import 'widgets/movies_box.dart';
@@ -50,8 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      //const HomePoster(),
-                      PosterShimmer(),
+                      const HomePoster(),
+                      //PosterShimmer(),
+                      const SizedBox(height: 13),
+
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
@@ -66,12 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 13),
                       const PreviewsAvatars(),
                       const SizedBox(height: 16),
+                      //MoviesShimmer(),
                       MoviesBox(title: "Popular on Netflix", imagePath: "assets/images/movie.jpg"),
-                      const SizedBox(height: 13),
+                      const SizedBox(height: 16),
                       MoviesBox(title: "Trending Now", imagePath: "assets/images/movie.jpg"),
-                      const SizedBox(height: 13),
+                      const SizedBox(height: 16),
                       MoviesBox(title: "Netflix Originals", imagePath: "assets/images/movie.jpg"),
-                      const SizedBox(height: 13),
+                      const SizedBox(height: 16),
                       MoviesBox(title: "New Release", imagePath: "assets/images/movie.jpg"),
                     ],
                   ),

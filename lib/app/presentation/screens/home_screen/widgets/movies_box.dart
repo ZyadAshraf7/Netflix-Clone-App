@@ -29,7 +29,7 @@ class MoviesBox extends StatelessWidget {
         ),
         const SizedBox(height: 14),
         SizedBox(
-          height: 190,
+          height: 170,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             shrinkWrap: true,

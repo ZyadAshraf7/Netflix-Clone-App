@@ -21,16 +21,21 @@ class HomePoster extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        Positioned(
-          child: Container(
-            height: 120,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.black54, Colors.black],
+        Container(
+          height: 100,
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 25,
+                offset: Offset(0, 20)
               ),
-            ),
+            ],
+            /*gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.black54, Colors.black],
+            ),*/
           ),
         ),
         //const HomeAppBar(),
