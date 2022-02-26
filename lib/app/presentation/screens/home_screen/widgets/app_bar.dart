@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
+import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
 
 import 'app_bar_text.dart';
 
@@ -46,23 +47,28 @@ class _HomeAppBarState extends State<HomeAppBar> {
                               height: 40,
                               color: AppTheme.redPrimaryColor,
                             ),
-                            state is LoadingUserData?const CircularProgressIndicator():GestureDetector(
-                              onTap: () => Navigator.pushNamed(context, RouteNames.userProfile),
-                              child: Container(
-                                padding: EdgeInsets.all(2),
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(5)),
-                                child: profileCubit.userModel?.photoUrl == ""
-                                    ? Image.asset("assets/images/child2.png")
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.network(
-                                          "${profileCubit.userModel?.photoUrl}",
-                                        ),
-                                      ),
-                              ),
-                            ),
+                            state is LoadingUserData
+                                ? const ContainerShimmer(
+                                    height: 35,
+                                    width: 35,
+                                  )
+                                : GestureDetector(
+                                    onTap: () => Navigator.pushNamed(context, RouteNames.userProfile),
+                                    child: Container(
+                                      padding: EdgeInsets.all(2),
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(5)),
+                                      child: profileCubit.userModel?.photoUrl == ""
+                                          ? Image.asset("assets/images/child2.png")
+                                          : ClipRRect(
+                                              borderRadius: BorderRadius.circular(16),
+                                              child: Image.network(
+                                                "${profileCubit.userModel?.photoUrl}",
+                                              ),
+                                            ),
+                                    ),
+                                  ),
                           ],
                         )
                       : SizedBox(),
