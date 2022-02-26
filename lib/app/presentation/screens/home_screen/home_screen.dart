@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    BlocProvider.of<GetUserDataCubit>(context).getUserData();
     scrollController = ScrollController()
       ..addListener(() {
         setState(() {

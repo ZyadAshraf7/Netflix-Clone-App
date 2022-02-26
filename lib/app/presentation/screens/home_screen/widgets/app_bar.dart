@@ -9,27 +9,22 @@ import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
 
 import 'app_bar_text.dart';
 
-class HomeAppBar extends StatefulWidget {
+class HomeAppBar extends StatelessWidget {
   HomeAppBar({Key? key, required this.scrollOffset}) : super(key: key);
   double scrollOffset;
 
   @override
-  State<HomeAppBar> createState() => _HomeAppBarState();
-}
-
-class _HomeAppBarState extends State<HomeAppBar> {
-  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final profileCubit = BlocProvider.of<GetUserDataCubit>(context);
-    profileCubit.getUserData();
+    // profileCubit.getUserData();
     return SingleChildScrollView(
       child: BlocConsumer<GetUserDataCubit, GetUserDataState>(
         listener: (context, state) {},
         builder: (context, state) {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 10),
-            color: Colors.black.withOpacity((widget.scrollOffset / 350).clamp(0, 0.8).toDouble()),
+            color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 0.8).toDouble()),
             //height: widget.scrollOffset<40?height:100,
             width: size.width,
             child: Column(
@@ -37,7 +32,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               children: [
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 600),
-                  child: widget.scrollOffset < 100
+                  child: scrollOffset < 100
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
