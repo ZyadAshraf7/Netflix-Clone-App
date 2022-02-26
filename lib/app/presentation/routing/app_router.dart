@@ -5,11 +5,13 @@ import 'package:netflix_app/app/buinsness_logic/cubits/auth/forget_password_cubi
 import 'package:netflix_app/app/buinsness_logic/cubits/auth/login_cubit/login_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/auth/register_cubit/register_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/bottom_navbar_cubit/bottom_nav_bar_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/data/repositories/authentication/email_verification_repository.dart';
 import 'package:netflix_app/app/data/repositories/authentication/forget_password_repository.dart';
 import 'package:netflix_app/app/data/repositories/authentication/login_repository.dart';
 import 'package:netflix_app/app/data/repositories/authentication/register_repository.dart';
+import 'package:netflix_app/app/data/repositories/get_user_data/user_data_repository.dart';
 import 'package:netflix_app/app/presentation/screens/authentications/screens/email_verfifcation_screen.dart';
 import 'package:netflix_app/app/presentation/screens/authentications/screens/forget_password_screen.dart';
 import 'package:netflix_app/app/presentation/screens/authentications/screens/login_screen.dart';
@@ -17,18 +19,21 @@ import 'package:netflix_app/app/presentation/screens/authentications/screens/reg
 import 'package:netflix_app/app/presentation/screens/bottom_navbar_screen/bottom_navbar_screen.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/home_screen.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/movie_details_screen.dart';
+import 'package:netflix_app/app/presentation/screens/profile_screen/profile_screen.dart';
 
 class AppRouter {
   late RegisterRepository registerRepository;
   late LoginRepository loginRepository;
   late EmailVerificationRepository emailVerificationRepository;
   late ForgetPasswordRepository forgetPasswordRepository;
+  late UserDataRepository userDataRepository;
 
   void initAppSettings() {
     registerRepository = RegisterRepository();
     loginRepository = LoginRepository();
     emailVerificationRepository = EmailVerificationRepository();
     forgetPasswordRepository = ForgetPasswordRepository();
+    userDataRepository=UserDataRepository();
   }
 
   Route? onGenerateRoutes(RouteSettings settings) {
@@ -74,6 +79,10 @@ class AppRouter {
             create: (context) => ForgetPasswordCubit(forgetPasswordRepository: forgetPasswordRepository),
             child: const ForgetPasswordScreen(),
           ),
+        );
+      case RouteNames.userProfile:
+        return MaterialPageRoute(
+          builder: (_) => const ProfileScreen(),
         );
     }
   }

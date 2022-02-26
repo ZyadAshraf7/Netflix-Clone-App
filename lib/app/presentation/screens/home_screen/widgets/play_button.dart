@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/data/shared_preference/user_preference.dart';
 
@@ -11,8 +12,9 @@ class PlayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FirebaseAuth.instance.signOut();
-        UserPreferences.setUserToken("");
+         FirebaseAuth.instance.signOut();
+         GoogleSignIn().disconnect();
+         UserPreferences.setUserToken("");
         Navigator.pushReplacementNamed(context, RouteNames.loginScreen);
       },
       child: Container(

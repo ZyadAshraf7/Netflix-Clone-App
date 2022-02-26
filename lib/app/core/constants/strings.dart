@@ -4,6 +4,7 @@ class Strings{
   static const sendEmailVerification = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=$firebaseApiKey";
   static const confirmEmailVerification = "https://identitytoolkit.googleapis.com/v1/accounts:update?key=$firebaseApiKey";
   static const sendPasswordReset = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=$firebaseApiKey";
+  static const getUserData ="https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=$firebaseApiKey";
 }
 const firebaseApiKey= "AIzaSyBtrUvMWv-L6u49pPM1yjTNi7n--kAOAwA";
 const sharedTokenId = "token";

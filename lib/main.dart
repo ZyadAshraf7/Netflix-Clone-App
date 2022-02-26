@@ -17,7 +17,7 @@ void main() async {
   runApp(
     NetflixApp(
       appRouter: AppRouter(),
-      initialRoute: RouteNames.loginScreen,
+      //initialRoute: RouteNames.loginScreen,
     ),
   );
 

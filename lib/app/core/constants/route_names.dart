@@ -7,4 +7,5 @@ class RouteNames {
   static const String emailVerificationScreen = "/emailVerificationScreen";
   static const String bottomNavBarScreen = "/bottomNavBarScreen";
   static const String forgetPasswordScreen = "/forgetPasswordScreen";
+  static const String userProfile = "/userProfile";
 }

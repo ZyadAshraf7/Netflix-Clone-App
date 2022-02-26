@@ -77,12 +77,15 @@ class LoginCubit extends Cubit<LoginState> {
       );
 
       // Once signed in, return the UserCredential
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
-        UserPreferences.setUserToken(googleAuth!.idToken!);
-        print(googleAuth.idToken);
-        UserPreferences.setUserVerification(true);
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);/*.then((value) {
+        //UserPreferences.setUserToken(googleAuth!.idToken!);
+        //print("googleToken: ${googleAuth.idToken}");
         return value;
-      });
+      });*/
+      print("userToken: ${await userCredential.user!.getIdToken()}");
+      final token = await userCredential.user!.getIdToken();
+      UserPreferences.setUserToken(token);
+      UserPreferences.setUserVerification(true);
       print(userCredential.user!.email);
       return userCredential;
     }catch(e){

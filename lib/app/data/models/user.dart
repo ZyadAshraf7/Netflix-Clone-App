@@ -1,13 +1,11 @@
-/*
 class UserModel {
   late String email;
-  late String password;
-  late String token;
+  late String userName;
+  String ? photoUrl;
 
   UserModel({
     required this.email,
-    required this.password,
-    required this.token,
+    required this.userName,
+    this.photoUrl,
   });
 }
-*/
