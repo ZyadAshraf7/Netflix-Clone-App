@@ -41,10 +41,10 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
               Positioned(
                 left: 0,
-                top: 22,
+                top: 5,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(RouteNames.home);
+                    Navigator.of(context).pushReplacementNamed(RouteNames.bottomNavBarScreen);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,
@@ -76,7 +76,7 @@ class MovieDetailsScreen extends StatelessWidget {
           const SizedBox(height: 8),
           movieTextDetails(),
           const SizedBox(height: 22),
-          const MoviesBox(title: "Related Movies", imagePath: "assets/images/movie.jpg")
+           //const MoviesBox(title: "Related Movies")
         ],
       ),
     );

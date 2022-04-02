@@ -19,7 +19,7 @@ class SocialMediaLogin extends StatelessWidget {
           color: AppTheme.smokeWhiteColor,
           function: () {
             BlocProvider.of<LoginCubit>(context).signInWithGoogle().then((value) {
-              Navigator.pushReplacementNamed(context, RouteNames.home);
+              Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
             });
           },
           child: Padding(

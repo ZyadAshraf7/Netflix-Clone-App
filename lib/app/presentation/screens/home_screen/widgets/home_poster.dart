@@ -59,7 +59,7 @@ class HomePoster extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            homePlayButtonAndIconsBox(),
+            const PosterIconsBox(),
             const SizedBox(height: 16),
           ],
         ),

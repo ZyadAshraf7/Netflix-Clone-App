@@ -135,7 +135,7 @@ class RegisterCubit extends Cubit<RegisterState> {
             buttonOnTap: () => Navigator.of(context).pop(),
             buttonTitle: "Done"
         ).then((value) {
-          Navigator.pushReplacementNamed(context, RouteNames.home);
+          Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
         });
         emit(EmailVerifiedSuccessfully());
         return true;

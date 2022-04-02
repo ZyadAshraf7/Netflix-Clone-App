@@ -1,59 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
+import 'package:netflix_app/app/core/theme/app_theme.dart';
+import 'package:netflix_app/app/data/models/movie_model.dart';
 
 class MoviesBox extends StatelessWidget {
   const MoviesBox({
     Key? key,
-    required this.title,
+    required this.moviesCategory,
     required this.imagePath,
   }) : super(key: key);
 
-  final String title;
+  final String moviesCategory;
   final String imagePath;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        const SizedBox(height: 14),
-        SizedBox(
-          height: 170,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, i) => ClipRRect(
+    return  BlocConsumer<GetMoviesCubit, GetMoviesState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        //final movies= BlocProvider.of<GetMoviesCubit>(context).moviesData;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 14),
+            ClipRRect(
               borderRadius: BorderRadius.circular(2),
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   //TODO: press on image to go to movie details
                   Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen);
                 },
-                child: Image.asset(
+                child: Image.network(
                   imagePath,
+                  width: 130,
+                  height: 170,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            separatorBuilder: (context, i) => const SizedBox(
-              width: 7,
-            ),
-            itemCount: 7,
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

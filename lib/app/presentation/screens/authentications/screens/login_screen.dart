@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, RouteNames.home);
+            Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
           }
           if (state is UserIsNotVerified) {
             alertDialog(

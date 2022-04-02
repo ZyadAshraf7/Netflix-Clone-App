@@ -7,8 +7,9 @@ class CustomButton extends StatelessWidget {
   double ?width;
   double ?height;
   Color ? color;
+  double ? borderRadius;
 
-  CustomButton({Key? key, required this.function, required this.child,this.width,this.height,this.color}) : super(key: key);
+  CustomButton({Key? key, required this.function, required this.child,this.width,this.height,this.color,this.borderRadius}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CustomButton extends StatelessWidget {
         height:height?? 53,
         decoration: BoxDecoration(
           color: color??AppTheme.redPrimaryColor,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(borderRadius??4),
         ),
         child: child
       ),

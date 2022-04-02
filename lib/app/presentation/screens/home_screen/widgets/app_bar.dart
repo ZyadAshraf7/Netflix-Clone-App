@@ -23,7 +23,7 @@ class HomeAppBar extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 10),
             color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 0.8).toDouble()),
             //height: widget.scrollOffset<40?height:100,
             width: size.width,
@@ -47,26 +47,10 @@ class HomeAppBar extends StatelessWidget {
                                     height: 35,
                                     width: 35,
                                   )
-                                : GestureDetector(
-                                    onTap: () => Navigator.pushNamed(context, RouteNames.userProfile),
-                                    child: Container(
-                                      padding: EdgeInsets.all(2),
-                                      height: 35,
-                                      width: 35,
-                                      decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(5)),
-                                      child: profileCubit.userModel?.photoUrl == ""
-                                          ? Image.asset("assets/images/child2.png")
-                                          : ClipRRect(
-                                              borderRadius: BorderRadius.circular(16),
-                                              child: Image.network(
-                                                "${profileCubit.userModel?.photoUrl}",
-                                              ),
-                                            ),
-                                    ),
-                                  ),
+                                : UserProfileBox(profileCubit: profileCubit),
                           ],
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,5 +66,35 @@ class HomeAppBar extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class UserProfileBox extends StatelessWidget {
+  const UserProfileBox({
+    Key? key,
+    required this.profileCubit,
+  }) : super(key: key);
+
+  final GetUserDataCubit profileCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () => Navigator.pushNamed(context, RouteNames.userProfile),
+        child: Container(
+          padding: const EdgeInsets.all(2),
+          height: 35,
+          width: 35,
+          decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(5)),
+          child: profileCubit.userModel?.photoUrl == ""
+              ? Image.asset("assets/images/child2.png")
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.network(
+                    "${profileCubit.userModel?.photoUrl}",
+                  ),
+                ),
+        ),
+      );
   }
 }

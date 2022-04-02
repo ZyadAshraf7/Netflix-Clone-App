@@ -5,6 +5,7 @@ class Strings{
   static const confirmEmailVerification = "https://identitytoolkit.googleapis.com/v1/accounts:update?key=$firebaseApiKey";
   static const sendPasswordReset = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=$firebaseApiKey";
   static const getUserData ="https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=$firebaseApiKey";
+  static const getMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/netflixMovies/allMovies.json";
 }
 const firebaseApiKey= "AIzaSyBtrUvMWv-L6u49pPM1yjTNi7n--kAOAwA";
 const sharedTokenId = "token";
