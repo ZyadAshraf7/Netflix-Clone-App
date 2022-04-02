@@ -10,10 +10,12 @@ class MoviesBox extends StatelessWidget {
     Key? key,
     required this.moviesCategory,
     required this.imagePath,
+    required this.arguments,
   }) : super(key: key);
 
   final String moviesCategory;
   final String imagePath;
+  final String arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class MoviesBox extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   //TODO: press on image to go to movie details
-                  Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen);
+                  Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen,arguments: arguments);
                 },
                 child: Image.network(
                   imagePath,

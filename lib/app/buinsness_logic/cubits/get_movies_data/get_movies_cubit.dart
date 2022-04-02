@@ -29,4 +29,7 @@ class GetMoviesCubit extends Cubit<GetMoviesState> {
       return [];
     }
   }
+  MovieModel findMovieById(String id){
+    return moviesData.firstWhere((movie) => movie.id==id);
+  }
 }

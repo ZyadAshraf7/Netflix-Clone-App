@@ -67,6 +67,7 @@ class AppRouter {
         );
       case RouteNames.movieDetailsScreen:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => const MovieDetailsScreen(),
         );
       case RouteNames.emailVerificationScreen:

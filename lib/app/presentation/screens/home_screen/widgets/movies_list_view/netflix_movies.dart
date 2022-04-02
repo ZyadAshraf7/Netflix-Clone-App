@@ -1,35 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
+import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_box.dart';
 
-class NetflixMovies extends StatefulWidget {
+class NetflixMovies extends StatelessWidget {
   const NetflixMovies({Key? key}) : super(key: key);
 
   @override
-  State<NetflixMovies> createState() => _NetflixMoviesState();
-}
-
-class _NetflixMoviesState extends State<NetflixMovies> {
-  @override
-  void initState() {
-    if(BlocProvider.of<GetMoviesCubit>(context).moviesData.isEmpty) {
-      BlocProvider.of<GetMoviesCubit>(context).fetchMovies();
-    }
-    // TODO: implement initState
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
+    final netflixMovies = BlocProvider.of<GetMoviesCubit>(context, listen: false).moviesData;
 
-    final netflixMovies = BlocProvider.of<GetMoviesCubit>(context,listen: false).moviesData;
-
-    return BlocConsumer<GetMoviesCubit,GetMoviesState>(
+    return BlocBuilder<GetMoviesCubit, GetMoviesState>(
       builder: (context, state) {
-        if(state is GetMoviesLoading){
-          return CircularProgressIndicator();
+        if (state is GetMoviesLoading) {
+          return const CircularProgressIndicator(
+            color: AppTheme.redPrimaryColor,
+          );
         }
-        if(state is GetMoviesLoadedSuccess){
+        if (state is GetMoviesLoadedSuccess) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,10 +40,13 @@ class _NetflixMoviesState extends State<NetflixMovies> {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, i) {
-                    return MoviesBox(moviesCategory: "Netflix Movies", imagePath: netflixMovies[i].image!);
+                    return MoviesBox(
+                      moviesCategory: "Netflix Movies",
+                      imagePath: netflixMovies[i].image!,
+                      arguments: netflixMovies[i].id!,
+                    );
                   },
-                  separatorBuilder: (context, i) =>
-                  const SizedBox(
+                  separatorBuilder: (context, i) => const SizedBox(
                     width: 7,
                   ),
                   itemCount: netflixMovies.length,
@@ -62,12 +54,11 @@ class _NetflixMoviesState extends State<NetflixMovies> {
               ),
             ],
           );
-        }else{
+        } else {
           print("error");
-          return Container();
+          return const SizedBox();
         }
       },
-      listener: (context, state) {},
     );
   }
 }
