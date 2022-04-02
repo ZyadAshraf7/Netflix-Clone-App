@@ -31,8 +31,8 @@ class MovieDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 500,
                 width: size.width,
-                child: Image.asset(
-                  "assets/images/movie.jpg",
+                child: Image.network(
+                  movie.image!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -64,14 +64,14 @@ class MovieDetailsScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 300,
                       width: 200,
-                      child: Image.asset(
-                        "assets/images/movie.jpg",
+                      child: Image.network(
+                        movie.image!,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  movieInfoBox(),
+                  MovieInfoBox(age: movie.age!,releaseYear: movie.releaseYear!,movieDuration: movie.runtime!,),
                   const SizedBox(height: 12),
                   movieDetailsButtons(context),
                 ],
