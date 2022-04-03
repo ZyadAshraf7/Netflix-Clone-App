@@ -35,12 +35,12 @@ class MovieModel {
     director = json['director'];
     image = json['image'];
     releaseYear = json['releaseYear'];
-    runtime = json['runtime'];
+    runtime = json['runtime']??"";
     age = json['age'];
     trailer = json['trailer'];
     genres = json['genres'].cast<String>();
-    totalViews = json['totalViews'];
-    weeklyViews = json['weeklyViews'];
+    totalViews = json['totalViews']??0;
+    weeklyViews = json['weeklyViews']??0;
   }
 
   Map<String, dynamic> toJson() {

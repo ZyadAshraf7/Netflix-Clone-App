@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/coming_soon_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/coming_soon_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/netflix_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
@@ -27,6 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<GetUserDataCubit>(context).getUserData();
     if (BlocProvider.of<GetMoviesCubit>(context).moviesData.isEmpty) {
       BlocProvider.of<GetMoviesCubit>(context).fetchMovies();
+    }
+    if (BlocProvider.of<ComingSoonMoviesCubit>(context).comingSoonMoviesData.isEmpty) {
+      BlocProvider.of<ComingSoonMoviesCubit>(context).fetchComingSoonMovies();
+    }
+    if (BlocProvider.of<GetAllMoviesDataCubit>(context).allMoviesData.isEmpty) {
+      BlocProvider.of<GetAllMoviesDataCubit>(context).fetchAllMoviesData();
     }
     scrollController = ScrollController()
       ..addListener(() {
@@ -59,12 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
-                       const HomePoster(),
+                    children: [
+                      const HomePoster(),
                       //PosterShimmer(),
-                       const SizedBox(height: 13),
+                      const SizedBox(height: 13),
 
-                       const Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
                           "Previews",
@@ -80,14 +89,30 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 16),
                       //MoviesShimmer(),
                       //NetflixMovies(),
-                      BlocConsumer<GetMoviesCubit,GetMoviesState>
-                        (builder: (context,state){
-                        if(state is GetMoviesLoading) {
-                          return const CircularProgressIndicator(color: AppTheme.redPrimaryColor,);
-                        } else{
-                          return const NetflixMovies();
-                        }
-                      }, listener: (context,state){}),
+                      BlocBuilder<GetMoviesCubit, GetMoviesState>(
+                        builder: (context, state) {
+                          if (state is GetMoviesLoading) {
+                            return const CircularProgressIndicator(
+                              color: AppTheme.redPrimaryColor,
+                            );
+                          } else {
+                            return const NetflixMovies();
+                          }
+                        },
+                      ),
+                      BlocBuilder<ComingSoonMoviesCubit, ComingSoonMoviesState>(
+                        builder: (context, state) {
+                          if (state is ComingSoonMoviesLoading) {
+                            return const CircularProgressIndicator(
+                              color: AppTheme.redPrimaryColor,
+                            );
+                          } else if(state is ComingSoonMoviesLoadedSuccess) {
+                            return const ComingSoonMovies();
+                          }else{
+                            return Text("Error");
+                          }
+                        },
+                      ),
                     ],
                   ),
                 )

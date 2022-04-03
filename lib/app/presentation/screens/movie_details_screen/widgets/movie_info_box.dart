@@ -10,7 +10,7 @@ class MovieInfoBox extends StatelessWidget {
       width: 250,
       child: Center(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Text(
               "94% Match",
@@ -36,6 +36,7 @@ class MovieInfoBox extends StatelessWidget {
                 style: const TextStyle(color: Colors.white38, fontWeight: FontWeight.bold),
               ),
             ),
+             if(movieDuration!="")
              Text(movieDuration, style: const TextStyle(color: Colors.white38, fontSize: 14))
           ],
         ),

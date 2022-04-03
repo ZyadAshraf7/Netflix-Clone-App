@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
-import 'package:netflix_app/app/core/theme/app_theme.dart';
-import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_box.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/coming_soon_movies_cubit.dart';
 
-class NetflixMovies extends StatelessWidget {
-  const NetflixMovies({Key? key}) : super(key: key);
+import '../movies_box.dart';
+
+class ComingSoonMovies extends StatelessWidget {
+  const ComingSoonMovies({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final netflixMovies = BlocProvider.of<GetMoviesCubit>(context, listen: false).moviesData;
-
-    return BlocBuilder<GetMoviesCubit, GetMoviesState>(
+    final comingSoonMovies=BlocProvider.of<ComingSoonMoviesCubit>(context,listen: false).comingSoonMoviesData;
+    return BlocBuilder<ComingSoonMoviesCubit, ComingSoonMoviesState>(
       builder: (context, state) {
-        if (state is GetMoviesLoading) {
-          return const CircularProgressIndicator(
-            color: AppTheme.redPrimaryColor,
-          );
-        }
-        if (state is GetMoviesLoadedSuccess) {
+        if(state is ComingSoonMoviesLoading){
+          return CircularProgressIndicator();
+        }else if(state is ComingSoonMoviesLoadedSuccess){
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
-                  "Netflix Movies",
+                  "Coming Soon",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -41,21 +37,20 @@ class NetflixMovies extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, i) {
                     return MoviesBox(
-                      imagePath: netflixMovies[i].image!,
-                      arguments: netflixMovies[i].id!,
+                      imagePath: comingSoonMovies[i].image!,
+                      arguments: comingSoonMovies[i].id!,
                     );
                   },
                   separatorBuilder: (context, i) => const SizedBox(
                     width: 7,
                   ),
-                  itemCount: netflixMovies.length,
+                  itemCount: comingSoonMovies.length,
                 ),
               ),
             ],
           );
-        } else {
-          print("error");
-          return const SizedBox();
+        }else{
+          return Text("error");
         }
       },
     );

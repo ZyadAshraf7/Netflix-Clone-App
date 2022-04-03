@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_box.dart';
@@ -19,7 +20,7 @@ class MovieDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final id = ModalRoute.of(context)!.settings.arguments as String;
-    final movie = BlocProvider.of<GetMoviesCubit>(context).findMovieById(id);
+    final movie = BlocProvider.of<GetAllMoviesDataCubit>(context).findMovieById(id);
     print(movie.name);
     return Scaffold(
       body: ListView(

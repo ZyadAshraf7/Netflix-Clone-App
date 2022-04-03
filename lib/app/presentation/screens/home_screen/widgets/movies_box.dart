@@ -8,12 +8,10 @@ import 'package:netflix_app/app/data/models/movie_model.dart';
 class MoviesBox extends StatelessWidget {
   const MoviesBox({
     Key? key,
-    required this.moviesCategory,
     required this.imagePath,
     required this.arguments,
   }) : super(key: key);
 
-  final String moviesCategory;
   final String imagePath;
   final String arguments;
 

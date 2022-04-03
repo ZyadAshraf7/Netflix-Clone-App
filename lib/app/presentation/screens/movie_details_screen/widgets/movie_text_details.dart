@@ -57,24 +57,6 @@ class MovieTextDetails extends StatelessWidget {
               ),
             ],
           ),
-          /*RichText(
-            text: const TextSpan(
-              children: [
-                TextSpan(
-                    text: "Starring: ",style: TextStyle(color: Colors.white38,fontWeight: FontWeight.bold,fontSize: 14,)
-                ),
-                TextSpan(
-                    text: "adipiscing elit. Sit quam dui,\n",style: TextStyle(color: Colors.white38,fontSize: 14,)
-                ),
-                TextSpan(
-                    text: "Director: ",style: TextStyle(color: Colors.white38,fontWeight: FontWeight.bold,fontSize: 14,)
-                ),
-                TextSpan(
-                    text: "adipiscing elit",style: TextStyle(color: Colors.white38,fontSize: 14,)
-                ),
-              ],
-            ),
-          )*/
         ],
       ),
     );
