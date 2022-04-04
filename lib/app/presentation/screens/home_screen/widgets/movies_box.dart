@@ -34,11 +34,15 @@ class MoviesBox extends StatelessWidget {
                   //TODO: press on image to go to movie details
                   Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen,arguments: arguments);
                 },
-                child: Image.network(
-                  imagePath,
-                  width: 130,
-                  height: 170,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: arguments,
+                  transitionOnUserGestures: true,
+                  child: Image.network(
+                    imagePath,
+                    width: 130,
+                    height: 170,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

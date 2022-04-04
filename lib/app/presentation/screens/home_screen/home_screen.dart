@@ -99,9 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<GetMoviesCubit, GetMoviesState>(
                         builder: (context, state) {
                           if (state is GetMoviesLoading) {
-                            return const CircularProgressIndicator(
-                              color: AppTheme.redPrimaryColor,
-                            );
+                            return const MoviesShimmer();
                           } else {
                             return const NetflixMovies();
                           }
@@ -110,9 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<ComingSoonMoviesCubit, ComingSoonMoviesState>(
                         builder: (context, state) {
                           if (state is ComingSoonMoviesLoading) {
-                            return const CircularProgressIndicator(
-                              color: AppTheme.redPrimaryColor,
-                            );
+                            return const MoviesShimmer();
                           } else if(state is ComingSoonMoviesLoadedSuccess) {
                             return const ComingSoonMovies();
                           }else{
@@ -123,9 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<GetTrendingNowMoviesCubit, GetTrendingNowMoviesState>(
                         builder: (context, state) {
                           if (state is GetTrendingNowMoviesLoading) {
-                            return const CircularProgressIndicator(
-                              color: AppTheme.redPrimaryColor,
-                            );
+                            return const MoviesShimmer();
                           } else if(state is GetTrendingNowMoviesLoadedSuccess) {
                             return const TrendingNowMovies();
                           }else{

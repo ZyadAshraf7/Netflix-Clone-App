@@ -24,7 +24,7 @@ class MovieDetailsScreen extends StatelessWidget {
     print(movie.name);
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         children: [
           Stack(
             alignment: Alignment.center,
@@ -50,7 +50,7 @@ class MovieDetailsScreen extends StatelessWidget {
                 top: 5,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(RouteNames.bottomNavBarScreen);
+                    Navigator.of(context).pop();
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,
@@ -65,9 +65,13 @@ class MovieDetailsScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 300,
                       width: 200,
-                      child: Image.network(
-                        movie.image!,
-                        fit: BoxFit.cover,
+                      child: Hero(
+                        tag: movie.id!,
+                        transitionOnUserGestures: true,
+                        child: Image.network(
+                          movie.image!,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),

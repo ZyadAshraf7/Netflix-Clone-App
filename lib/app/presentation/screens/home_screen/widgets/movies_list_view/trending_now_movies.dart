@@ -9,12 +9,7 @@ class TrendingNowMovies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trendingNowMovies= BlocProvider.of<GetTrendingNowMoviesCubit>(context,listen: false).trendingNowMoviesData;
-    return BlocBuilder<GetTrendingNowMoviesCubit, GetTrendingNowMoviesState>(
-      builder: (context, state) {
-        if(state is GetTrendingNowMoviesLoading){
-          return CircularProgressIndicator();
-        }else if(state is GetTrendingNowMoviesLoadedSuccess){
-          return Column(
+    return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
@@ -48,10 +43,5 @@ class TrendingNowMovies extends StatelessWidget {
               ),
             ],
           );
-        }else{
-         return Text("Error");
-        }
-      },
-    );
   }
 }
