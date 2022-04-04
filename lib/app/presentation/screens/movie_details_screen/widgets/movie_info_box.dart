@@ -4,6 +4,7 @@ class MovieInfoBox extends StatelessWidget {
   final String releaseYear;
   final String age;
   final String movieDuration;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

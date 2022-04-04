@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/coming_soon_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_trending_now_movies/get_trending_now_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/coming_soon_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/netflix_movies.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/trending_now_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/previews_avatars.dart';
@@ -27,7 +29,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<GetUserDataCubit>(context).getUserData();
+    if(BlocProvider.of<GetUserDataCubit>(context).userModel==null){
+      BlocProvider.of<GetUserDataCubit>(context).getUserData();
+    }
     if (BlocProvider.of<GetMoviesCubit>(context).moviesData.isEmpty) {
       BlocProvider.of<GetMoviesCubit>(context).fetchMovies();
     }
@@ -36,6 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (BlocProvider.of<GetAllMoviesDataCubit>(context).allMoviesData.isEmpty) {
       BlocProvider.of<GetAllMoviesDataCubit>(context).fetchAllMoviesData();
+    }
+    if (BlocProvider.of<GetTrendingNowMoviesCubit>(context).trendingNowMoviesData.isEmpty) {
+      BlocProvider.of<GetTrendingNowMoviesCubit>(context).fetchTrendingNowMovies();
     }
     scrollController = ScrollController()
       ..addListener(() {
@@ -108,6 +115,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           } else if(state is ComingSoonMoviesLoadedSuccess) {
                             return const ComingSoonMovies();
+                          }else{
+                            return Text("Error");
+                          }
+                        },
+                      ),
+                      BlocBuilder<GetTrendingNowMoviesCubit, GetTrendingNowMoviesState>(
+                        builder: (context, state) {
+                          if (state is GetTrendingNowMoviesLoading) {
+                            return const CircularProgressIndicator(
+                              color: AppTheme.redPrimaryColor,
+                            );
+                          } else if(state is GetTrendingNowMoviesLoadedSuccess) {
+                            return const TrendingNowMovies();
                           }else{
                             return Text("Error");
                           }

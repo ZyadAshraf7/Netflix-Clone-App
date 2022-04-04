@@ -12,6 +12,7 @@ class ComingSoonMoviesCubit extends Cubit<ComingSoonMoviesState> {
 
   Future<void>fetchComingSoonMovies()async {
     try{
+      emit(ComingSoonMoviesLoading());
       final data = await comingSoonMoviesRepository.getComingSoonMovies();
       if (data.isNotEmpty) {
         emit(ComingSoonMoviesLoadedSuccess());
