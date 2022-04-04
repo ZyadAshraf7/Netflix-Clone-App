@@ -22,7 +22,7 @@ class MoviesBox extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        //final movies= BlocProvider.of<GetMoviesCubit>(context).moviesData;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
