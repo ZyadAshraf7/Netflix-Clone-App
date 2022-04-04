@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
-import 'package:netflix_app/app/core/theme/app_theme.dart';
-import 'package:netflix_app/app/data/models/movie_model.dart';
+import 'package:netflix_app/app/presentation/widgets/bottom_sheet.dart';
 
 class MoviesBox extends StatelessWidget {
   const MoviesBox({
@@ -17,22 +14,17 @@ class MoviesBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<GetMoviesCubit, GetMoviesState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 14),
             ClipRRect(
               borderRadius: BorderRadius.circular(2),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   //TODO: press on image to go to movie details
                   Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen,arguments: arguments);
+                  //customBottomSheet(context: context);
                 },
                 child: Hero(
                   tag: arguments,
@@ -48,7 +40,5 @@ class MoviesBox extends StatelessWidget {
             ),
           ],
         );
-      },
-    );
   }
 }

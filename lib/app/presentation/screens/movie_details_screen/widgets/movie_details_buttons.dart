@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
+import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_video_player.dart';
 import 'package:netflix_app/app/presentation/widgets/custom_button.dart';
 Widget movieDetailsButtons (BuildContext context){
   Size size = MediaQuery.of(context).size;
@@ -10,7 +11,9 @@ Widget movieDetailsButtons (BuildContext context){
         width: size.width-17,
         height: 45,
         color: AppTheme.smokeWhiteColor,
-        function: () {},
+        function: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (_)=>MovieVideoPlayer()));
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
