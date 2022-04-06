@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart'as http;
 import 'package:netflix_app/app/core/constants/strings.dart';
 import 'package:netflix_app/app/data/shared_preference/user_preference.dart';

@@ -14,7 +14,7 @@ class GetUserDataCubit extends Cubit<GetUserDataState> {
     try {
       emit(LoadingUserData());
       final data = await userDataRepository.getUserData();
-     // print(data);
+      print(data);
     //  print(data['users'][0]);
       if(data['users']!=null) {
         final userData = await data['users'][0];

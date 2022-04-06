@@ -78,7 +78,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   MovieInfoBox(age: movie.age!,releaseYear: movie.releaseYear!,movieDuration: movie.runtime!,),
                   const SizedBox(height: 12),
-                  movieDetailsButtons(context),
+                  MovieDetailsButtons(trailerPath: movie.trailer!,),
                 ],
               ),
             ],
