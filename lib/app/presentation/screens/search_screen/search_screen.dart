@@ -32,7 +32,7 @@ class SearchScreen extends StatelessWidget {
                     height: 40,
                     color: AppTheme.redPrimaryColor,
                   ),
-                  UserProfileBox(profileCubit: BlocProvider.of<GetUserDataCubit>(context)),
+                  UserProfileBox(/*profileCubit: BlocProvider.of<GetUserDataCubit>(context)*/),
                 ],
               ),
             ),

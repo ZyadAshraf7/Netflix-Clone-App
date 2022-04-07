@@ -47,7 +47,7 @@ class HomeAppBar extends StatelessWidget {
                                     height: 35,
                                     width: 35,
                                   )
-                                : UserProfileBox(profileCubit: profileCubit),
+                                : UserProfileBox(),
                           ],
                         )
                       : const SizedBox(),
@@ -72,10 +72,10 @@ class HomeAppBar extends StatelessWidget {
 class UserProfileBox extends StatelessWidget {
   const UserProfileBox({
     Key? key,
-    required this.profileCubit,
+    //required this.profileCubit,
   }) : super(key: key);
 
-  final GetUserDataCubit profileCubit;
+ // final GetUserDataCubit profileCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +86,12 @@ class UserProfileBox extends StatelessWidget {
           height: 35,
           width: 35,
           decoration: BoxDecoration(color: Colors.deepPurple, borderRadius: BorderRadius.circular(5)),
-          child: profileCubit.userModel?.photoUrl == ""
+          child: BlocProvider.of<GetUserDataCubit>(context).userModel?.photoUrl==""
               ? Image.asset("assets/images/child2.png")
               : ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.network(
-                    "${profileCubit.userModel?.photoUrl}",
+                    "${BlocProvider.of<GetUserDataCubit>(context).userModel?.photoUrl}",
                   ),
                 ),
         ),

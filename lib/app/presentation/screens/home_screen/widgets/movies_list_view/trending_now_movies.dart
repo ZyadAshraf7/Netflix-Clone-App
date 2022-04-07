@@ -12,14 +12,14 @@ class TrendingNowMovies extends StatelessWidget {
     return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
                   "Trending Now",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                    color: Colors.white.withOpacity(0.9),
                   ),
                 ),
               ),

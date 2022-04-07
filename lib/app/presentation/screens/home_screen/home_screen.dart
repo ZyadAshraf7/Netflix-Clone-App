@@ -14,6 +14,7 @@ import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/previews_avatars.dart';
+import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
 import 'widgets/movies_box.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 13),
                       const PreviewsAvatars(),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 19),
                       //MoviesShimmer(),
                       //NetflixMovies(),
                       BlocBuilder<GetMoviesCubit, GetMoviesState>(
@@ -105,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                         },
                       ),
+                      const SizedBox(height: 19),
                       BlocBuilder<ComingSoonMoviesCubit, ComingSoonMoviesState>(
                         builder: (context, state) {
                           if (state is ComingSoonMoviesLoading) {
@@ -116,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                         },
                       ),
+                      const SizedBox(height: 19),
                       BlocBuilder<GetTrendingNowMoviesCubit, GetTrendingNowMoviesState>(
                         builder: (context, state) {
                           if (state is GetTrendingNowMoviesLoading) {

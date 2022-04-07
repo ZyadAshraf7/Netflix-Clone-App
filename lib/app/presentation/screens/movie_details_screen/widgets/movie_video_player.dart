@@ -65,15 +65,16 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: loading
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: AppTheme.redPrimaryColor,
-                ),
-              )
-            : Chewie(
-                controller: chewieController,
-              ));
+      body: loading
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: AppTheme.redPrimaryColor,
+              ),
+            )
+          : Chewie(
+              controller: chewieController,
+            ),
+    );
   }
 }
 

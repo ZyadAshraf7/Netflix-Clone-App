@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_box.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_details_buttons.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_text_details.dart';
+import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
 import 'package:netflix_app/app/presentation/widgets/custom_button.dart';
 
 import 'widgets/movie_info_box.dart';
@@ -32,8 +34,8 @@ class MovieDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 500,
                 width: size.width,
-                child: Image.network(
-                  movie.image!,
+                child: CachedNetworkImage(
+                  imageUrl: movie.image!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -68,9 +70,15 @@ class MovieDetailsScreen extends StatelessWidget {
                       child: Hero(
                         tag: movie.id!,
                         transitionOnUserGestures: true,
-                        child: Image.network(
-                          movie.image!,
+                        child: CachedNetworkImage(
+                          maxHeightDiskCache: 200,
+                          maxWidthDiskCache: 200,
+                          filterQuality: FilterQuality.medium,
+                          imageUrl: movie.image!,
                           fit: BoxFit.cover,
+                          placeholder: (context,_){
+                            return ContainerShimmer();
+                          },
                         ),
                       ),
                     ),
