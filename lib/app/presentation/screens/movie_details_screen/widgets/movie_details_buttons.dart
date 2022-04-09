@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_video_player.dart';
+import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/video.dart';
 import 'package:netflix_app/app/presentation/widgets/custom_button.dart';
 class MovieDetailsButtons extends StatelessWidget {
   const MovieDetailsButtons({Key? key,required this.trailerPath}) : super(key: key);

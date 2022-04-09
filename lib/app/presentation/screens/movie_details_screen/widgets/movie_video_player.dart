@@ -14,11 +14,11 @@ class MovieVideoPlayer extends StatefulWidget {
 }
 
 class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
-  late VideoPlayerController controller;
   late ChewieController chewieController;
-  String m =
-      "https://imdb-video.media-imdb.com/vi745521945/1434659607842-pgv4ql-1646173137923.mp4?Expires=1649356599&Signature=QJxXeozmLTtGCNpRXVMFSxKn2TnXYnl5hN5nFMQSlrcajlY~rAYNzvwnXwBAj5a-tAlyvormqFK8-S89odaJ5x5ETOJvrLSnTwfQiqWvr1Vbw91s6r-GFbRwInX2gsteUF5IZK7-Fr-KiG1tomBlRlDvr5ogKuJApaZx2OjZ8QwD-Nqng0Kxt3Z4RuR~gc0SVadpx180Tr7zc8Oogil4MyDC2Jv1NuO3Nojfj3RWPYrwrVCvjPLDCj6xlRNe-WKJX25OMHGum4QPpfpdRNqMpAgFdhuL5u9Afeeny9RywNPbkfs4Cg-OFDfGX8Y3vlL1pcmscaD7eN4Yd1yTxRm4Ww__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA";
-  bool loading = true;
+  late VideoPlayerController controller;
+ /* String m =
+      "https://firebasestorage.googleapis.com/v0/b/netflix-bfc7b.appspot.com/o/1434659607842-pgv4ql-1646173137923.mp4?alt=media&token=5a1ceb66-f970-440a-87f3-57dc80f1e44c";
+*/  bool loading = true;
 
   @override
   void initState() {
@@ -36,7 +36,14 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
         looping: true,
         autoPlay: true,
         allowFullScreen: true,
-        //aspectRatio: controller.value.aspectRatio,
+        errorBuilder: (context, errorMessage) {
+          return Center(
+            child: Text(
+              errorMessage,
+              style: const TextStyle(color: Colors.white),
+            ),
+          );
+        },
         routePageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondAnimation, provider) {
           return AnimatedBuilder(
             animation: animation,
@@ -59,6 +66,7 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
   @override
   void dispose() {
     controller.dispose();
+    //chewieController.dispose();
     super.dispose();
   }
 
