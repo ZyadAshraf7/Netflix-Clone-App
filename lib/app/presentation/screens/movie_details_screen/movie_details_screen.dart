@@ -71,9 +71,9 @@ class MovieDetailsScreen extends StatelessWidget {
                         tag: movie.id!,
                         transitionOnUserGestures: true,
                         child: CachedNetworkImage(
-                          maxHeightDiskCache: 200,
-                          maxWidthDiskCache: 200,
-                          filterQuality: FilterQuality.medium,
+                          maxHeightDiskCache:500,
+                          maxWidthDiskCache: 500,
+                          filterQuality: FilterQuality.high,
                           imageUrl: movie.image!,
                           fit: BoxFit.cover,
                           placeholder: (context,_){

@@ -6,11 +6,24 @@ import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/data/repositories/get_user_data/user_data_repository.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 
-class SearchScreen extends StatelessWidget {
+import 'widgets/searched_movies_box.dart';
+
+class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  TextEditingController searchedText = TextEditingController();
+  @override
   Widget build(BuildContext context) {
+    searchedText.addListener(() {
+      if(mounted){
+        setState(() {});
+      }
+    });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
@@ -32,7 +45,7 @@ class SearchScreen extends StatelessWidget {
                     height: 40,
                     color: AppTheme.redPrimaryColor,
                   ),
-                  UserProfileBox(/*profileCubit: BlocProvider.of<GetUserDataCubit>(context)*/),
+                  const UserProfileBox(/*profileCubit: BlocProvider.of<GetUserDataCubit>(context)*/),
                 ],
               ),
             ),
@@ -41,6 +54,7 @@ class SearchScreen extends StatelessWidget {
               width: size.width,
               color: AppTheme.deepDarkGrey,
               child: TextFormField(
+                controller: searchedText,
                 textAlignVertical: TextAlignVertical.center,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
@@ -54,6 +68,12 @@ class SearchScreen extends StatelessWidget {
                       height: 20,
                       width: 20,
                     ),
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      searchedText.clear();
+                    },
+                    icon: searchedText.text.isNotEmpty?const Icon(Icons.clear,size: 20,color: Colors.white,):const SizedBox()
                   ),
                   hintText: "Search for a show, movie, genre, e.t.c.",
                   hintStyle: const TextStyle(
@@ -75,7 +95,7 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 21),
-            TopSearchedMoviesBox(),
+            const SearchedMoviesBox(),
           ],
         ),
       ),
@@ -83,58 +103,4 @@ class SearchScreen extends StatelessWidget {
   }
 }
 
-class TopSearchedMoviesBox extends StatelessWidget {
-  const TopSearchedMoviesBox({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Expanded(
-      child: ListView.separated(
-          itemBuilder: (context, i) {
-            return Container(
-              width: size.width,
-              color: AppTheme.deepDarkGrey,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 150,
-                    height: 80,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(2),
-                      child: Image.asset(
-                        "assets/images/poster.jpg",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                      width: size.width - 175,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Dark Desires",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: SvgPicture.asset("assets/images/icons/play-circle.svg"),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            );
-          },
-          separatorBuilder: (context, _) {
-            return const SizedBox(height: 4);
-          },
-          itemCount: 20),
-    );
-  }
-}

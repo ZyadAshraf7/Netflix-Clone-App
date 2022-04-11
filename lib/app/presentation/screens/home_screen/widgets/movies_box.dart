@@ -35,9 +35,9 @@ class MoviesBox extends StatelessWidget {
                 tag: arguments,
                 transitionOnUserGestures: true,
                 child: CachedNetworkImage(
-                  maxHeightDiskCache: 200,
-                  maxWidthDiskCache: 200,
-                  filterQuality: FilterQuality.medium,
+                  maxHeightDiskCache: 500,
+                  maxWidthDiskCache: 500,
+                  filterQuality: FilterQuality.high,
                   imageUrl: imagePath,
                   width: 130,
                   height: 170,

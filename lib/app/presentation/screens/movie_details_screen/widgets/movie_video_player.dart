@@ -33,9 +33,12 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
     //controller.initialize();
     chewieController = ChewieController(
         videoPlayerController: controller,
-        looping: true,
         autoPlay: true,
         allowFullScreen: true,
+        materialProgressColors: ChewieProgressColors(
+          playedColor: AppTheme.redPrimaryColor,
+          handleColor: Colors.white,
+        ),
         errorBuilder: (context, errorMessage) {
           return Center(
             child: Text(
