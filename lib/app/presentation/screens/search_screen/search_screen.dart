@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
+import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/data/models/movie_model.dart';
 import 'package:netflix_app/app/data/repositories/get_user_data/user_data_repository.dart';
@@ -19,6 +20,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchedText = TextEditingController();
+  FocusNode focusNode = FocusNode();
   late List<MovieModel> allMovies;
   late List<MovieModel> searchedMovies;
 
@@ -31,6 +33,13 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     allMovies = BlocProvider.of<GetAllMoviesDataCubit>(context).allMoviesData;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchedText.dispose();
+    focusNode.dispose();
   }
 
   @override
@@ -61,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     height: 40,
                     color: AppTheme.redPrimaryColor,
                   ),
-                  const UserProfileBox(/*profileCubit: BlocProvider.of<GetUserDataCubit>(context)*/),
+                  const UserProfileBox(),
                 ],
               ),
             ),
@@ -73,6 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 onChanged: (c) {
                   addSearchedFOrItemsToSearchedList(c);
                 },
+                focusNode: focusNode,
                 controller: searchedText,
                 textAlignVertical: TextAlignVertical.center,
                 style: const TextStyle(color: Colors.white),
@@ -132,55 +142,65 @@ class _SearchScreenState extends State<SearchScreen> {
                   return Expanded(
                     child: ListView.separated(
                         itemBuilder: (context, i) {
-                          return Container(
-                            width: size.width,
-                            color: AppTheme.deepDarkGrey,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 150,
-                                  height: 90,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(2),
-                                    child: CachedNetworkImage(
-                                      maxHeightDiskCache: 500,
-                                      maxWidthDiskCache: 500,
-                                      filterQuality: FilterQuality.high,
-                                      imageUrl: searchedText.text.isEmpty ? allMovies[i].image! : searchedMovies[i].image!,
-                                      fit: BoxFit.cover,
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                RouteNames.movieDetailsScreen,
+                                arguments: searchedText.text.isEmpty ? allMovies[i].id! : searchedMovies[i].id!,
+                              );
+                              focusNode.unfocus();
+                            },
+                            child: Container(
+                              width: size.width,
+                              color: AppTheme.deepDarkGrey,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    height: 90,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(2),
+                                      child: CachedNetworkImage(
+                                        maxHeightDiskCache: 500,
+                                        maxWidthDiskCache: 500,
+                                        filterQuality: FilterQuality.high,
+                                        imageUrl: searchedText.text.isEmpty ? allMovies[i].image! : searchedMovies[i].image!,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: SizedBox(
-                                    width: size.width - 175,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            searchedText.text.isEmpty ? allMovies[i].name! : searchedMovies[i].name!,
-                                            style: const TextStyle(color: Colors.white, overflow: TextOverflow.ellipsis),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: SizedBox(
+                                      width: size.width - 175,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              searchedText.text.isEmpty ? allMovies[i].name! : searchedMovies[i].name!,
+                                              style: const TextStyle(color: Colors.white, overflow: TextOverflow.ellipsis),
+                                            ),
                                           ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (_) => MovieVideoPlayer(
-                                                  trailerPath: searchedText.text.isEmpty ? allMovies[i].trailer! : searchedMovies[i].trailer!,
+                                          IconButton(
+                                            onPressed: () {
+                                              focusNode.unfocus();
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (_) => MovieVideoPlayer(
+                                                    trailerPath: searchedText.text.isEmpty ? allMovies[i].trailer! : searchedMovies[i].trailer!,
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                          icon: SvgPicture.asset("assets/images/icons/play-circle.svg"),
-                                        )
-                                      ],
+                                              );
+                                            },
+                                            icon: SvgPicture.asset("assets/images/icons/play-circle.svg"),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -200,3 +220,6 @@ class _SearchScreenState extends State<SearchScreen> {
     ));
   }
 }
+
+
+
