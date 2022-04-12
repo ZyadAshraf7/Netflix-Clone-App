@@ -8,6 +8,7 @@ import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/data/models/movie_model.dart';
 import 'package:netflix_app/app/data/repositories/get_user_data/user_data_repository.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
+import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_video_player.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -164,7 +165,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                           ),
                                         ),
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (_) => MovieVideoPlayer(
+                                                  trailerPath: searchedText.text.isEmpty ? allMovies[i].trailer! : searchedMovies[i].trailer!,
+                                                ),
+                                              ),
+                                            );
+                                          },
                                           icon: SvgPicture.asset("assets/images/icons/play-circle.svg"),
                                         )
                                       ],
