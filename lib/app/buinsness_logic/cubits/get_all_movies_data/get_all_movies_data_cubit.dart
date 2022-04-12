@@ -12,9 +12,14 @@ class GetAllMoviesDataCubit extends Cubit<GetAllMoviesDataState> {
 
   Future<void>fetchAllMoviesData()async{
     try{
+      emit(GetAllMoviesDataLoading());
       final data = await allMoviesDataRepository.getAllMoviesData();
       allMoviesData=(data).map((movie) => MovieModel.fromJson(movie)).toList();
+      if(allMoviesData.isNotEmpty) {
+        emit(GetAllMoviesDataLoadedSuccess());
+      }
     }catch(e){
+      emit(GetAllMoviesDataError());
       print(e.toString());
     }
   }

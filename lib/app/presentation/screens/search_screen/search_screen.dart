@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
+import 'package:netflix_app/app/data/models/movie_model.dart';
 import 'package:netflix_app/app/data/repositories/get_user_data/user_data_repository.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
-
-import 'widgets/searched_movies_box.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -17,10 +18,24 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchedText = TextEditingController();
+  late List<MovieModel> allMovies;
+  late List<MovieModel> searchedMovies;
+
+  void addSearchedFOrItemsToSearchedList(String searchedCharacter) {
+    searchedMovies = allMovies.where((character) => character.name!.toLowerCase().startsWith(searchedCharacter)).toList();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    allMovies = BlocProvider.of<GetAllMoviesDataCubit>(context).allMoviesData;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     searchedText.addListener(() {
-      if(mounted){
+      if (mounted) {
         setState(() {});
       }
     });
@@ -54,6 +69,9 @@ class _SearchScreenState extends State<SearchScreen> {
               width: size.width,
               color: AppTheme.deepDarkGrey,
               child: TextFormField(
+                onChanged: (c) {
+                  addSearchedFOrItemsToSearchedList(c);
+                },
                 controller: searchedText,
                 textAlignVertical: TextAlignVertical.center,
                 style: const TextStyle(color: Colors.white),
@@ -70,11 +88,16 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {
-                      searchedText.clear();
-                    },
-                    icon: searchedText.text.isNotEmpty?const Icon(Icons.clear,size: 20,color: Colors.white,):const SizedBox()
-                  ),
+                      onPressed: () {
+                        searchedText.clear();
+                      },
+                      icon: searchedText.text.isNotEmpty
+                          ? const Icon(
+                              Icons.clear,
+                              size: 20,
+                              color: Colors.white,
+                            )
+                          : const SizedBox()),
                   hintText: "Search for a show, movie, genre, e.t.c.",
                   hintStyle: const TextStyle(
                     color: AppTheme.midGreyColor,
@@ -95,12 +118,76 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             const SizedBox(height: 21),
-            const SearchedMoviesBox(),
+            BlocBuilder<GetAllMoviesDataCubit, GetAllMoviesDataState>(
+              builder: (context, state) {
+                if (state is GetAllMoviesDataLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppTheme.redPrimaryColor,
+                    ),
+                  );
+                }
+                if (state is GetAllMoviesDataLoadedSuccess) {
+                  return Expanded(
+                    child: ListView.separated(
+                        itemBuilder: (context, i) {
+                          return Container(
+                            width: size.width,
+                            color: AppTheme.deepDarkGrey,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 150,
+                                  height: 90,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(2),
+                                    child: CachedNetworkImage(
+                                      maxHeightDiskCache: 500,
+                                      maxWidthDiskCache: 500,
+                                      filterQuality: FilterQuality.high,
+                                      imageUrl: searchedText.text.isEmpty ? allMovies[i].image! : searchedMovies[i].image!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: SizedBox(
+                                    width: size.width - 175,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            searchedText.text.isEmpty ? allMovies[i].name! : searchedMovies[i].name!,
+                                            style: const TextStyle(color: Colors.white, overflow: TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: SvgPicture.asset("assets/images/icons/play-circle.svg"),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, _) {
+                          return const SizedBox(height: 4);
+                        },
+                        itemCount: searchedText.text.isEmpty ? allMovies.length : searchedMovies.length),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
           ],
         ),
       ),
     ));
   }
 }
-
-
