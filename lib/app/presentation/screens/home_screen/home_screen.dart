@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/coming_soon_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_popular_movies/get_popular_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_trending_now_movies/get_trending_now_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
@@ -10,6 +11,7 @@ import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/coming_soon_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/netflix_movies.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/popular_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/trending_now_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
@@ -44,6 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (BlocProvider.of<GetTrendingNowMoviesCubit>(context).trendingNowMoviesData.isEmpty) {
       BlocProvider.of<GetTrendingNowMoviesCubit>(context).fetchTrendingNowMovies();
+    }
+    if (BlocProvider.of<GetPopularMoviesCubit>(context).popularMoviesData.isEmpty) {
+      BlocProvider.of<GetPopularMoviesCubit>(context).fetchPopularMovies();
     }
     scrollController = ScrollController()
       ..addListener(() {
@@ -125,6 +130,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             return const MoviesShimmer();
                           } else if(state is GetTrendingNowMoviesLoadedSuccess) {
                             return const TrendingNowMovies();
+                          }else{
+                            return Text("Error");
+                          }
+                        },
+                      ),
+                      BlocBuilder<GetPopularMoviesCubit, GetPopularMoviesState>(
+                        builder: (context, state) {
+                          if (state is GetPopularMoviesLoading) {
+                            return const MoviesShimmer();
+                          } else if(state is GetPopularMoviesLoadedSuccess) {
+                            return const PopularMovies();
                           }else{
                             return Text("Error");
                           }

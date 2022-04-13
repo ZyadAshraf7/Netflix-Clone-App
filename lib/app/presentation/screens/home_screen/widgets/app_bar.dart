@@ -31,7 +31,7 @@ class HomeAppBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 250),
                   child: scrollOffset < 100
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +47,7 @@ class HomeAppBar extends StatelessWidget {
                                     height: 35,
                                     width: 35,
                                   )
-                                : UserProfileBox(),
+                                : const UserProfileBox(),
                           ],
                         )
                       : const SizedBox(),
