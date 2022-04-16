@@ -9,10 +9,18 @@ class UserDataRepository{
     try {
       const url = Strings.getUserData;
       // send idToken to receive user data
+      UserPreferences.setUserToken(await FirebaseAuth.instance.currentUser!.getIdToken());
       final response = await http.post(Uri.parse(url), body: {
         "idToken": UserPreferences.getUserToken()
       });
-      //print("userData ${response.body}");
+      /*const url = Strings.refreshToken;
+      print("token ${await FirebaseAuth.instance.currentUser?.getIdToken()}");
+
+      final response = await http.post(Uri.parse(url), body: json.encode({
+        'grant_type': 'refresh_token',
+        'refresh_token': FirebaseAuth.instance.currentUser?.refreshToken, // Your refresh token.
+      }),);
+      print("userData ${response.body}");*/
       return jsonDecode(response.body);
     }catch(e){
       print(e.toString());

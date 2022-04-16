@@ -17,7 +17,7 @@ class GetMoviesCubit extends Cubit<GetMoviesState> {
       if (data.isNotEmpty) {
         emit(GetMoviesLoadedSuccess());
         moviesData = (data).map((e) => MovieModel.fromJson(e)).toList();
-        print("movies are: ${moviesData.toList()}");
+        //print("movies are: ${moviesData.toList()}");
         return moviesData;
 
       }

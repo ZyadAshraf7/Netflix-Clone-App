@@ -36,7 +36,7 @@ class NetflixApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => GetUserDataCubit(userDataRepository: UserDataRepository())..getUserData(),
+          create: (context) => GetUserDataCubit(userDataRepository: UserDataRepository()),
         ),
         BlocProvider(
           create: (context) => GetMoviesCubit(moviesRepository: MoviesRepository()),

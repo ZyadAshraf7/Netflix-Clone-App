@@ -135,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                         },
                       ),
+                      const SizedBox(height: 19),
                       BlocBuilder<GetPopularMoviesCubit, GetPopularMoviesState>(
                         builder: (context, state) {
                           if (state is GetPopularMoviesLoading) {
