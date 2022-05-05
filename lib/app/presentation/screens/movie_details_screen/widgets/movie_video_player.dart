@@ -6,8 +6,12 @@ import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:video_player/video_player.dart';
 
 class MovieVideoPlayer extends StatefulWidget {
-  const MovieVideoPlayer({Key? key, required this.trailerPath}) : super(key: key);
+  MovieVideoPlayer({Key? key, required this.trailerPath,this.autoPlay,this.allowFullScreen,this.showOptions,/*this.isVisible*/}) : super(key: key);
   final String trailerPath;
+  bool ?autoPlay;
+  bool ? allowFullScreen;
+  bool ? showOptions;
+  //bool ? isVisible;
 
   @override
   _MovieVideoPlayerState createState() => _MovieVideoPlayerState();
@@ -16,9 +20,7 @@ class MovieVideoPlayer extends StatefulWidget {
 class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
   late ChewieController chewieController;
   late VideoPlayerController controller;
- /* String m =
-      "https://firebasestorage.googleapis.com/v0/b/netflix-bfc7b.appspot.com/o/1434659607842-pgv4ql-1646173137923.mp4?alt=media&token=5a1ceb66-f970-440a-87f3-57dc80f1e44c";
-*/  bool loading = true;
+  bool loading = true;
 
   @override
   void initState() {
@@ -33,8 +35,10 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
     //controller.initialize();
     chewieController = ChewieController(
         videoPlayerController: controller,
-        autoPlay: true,
-        allowFullScreen: true,
+        autoPlay: widget.autoPlay??true,
+        allowFullScreen: widget.allowFullScreen??true,
+        //showControls: widget.showControls??true,
+        showOptions: widget.showOptions??true,
         materialProgressColors: ChewieProgressColors(
           playedColor: AppTheme.redPrimaryColor,
           handleColor: Colors.white,
@@ -69,6 +73,7 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
   @override
   void dispose() {
     controller.dispose();
+    chewieController.pause();
     //chewieController.dispose();
     super.dispose();
   }

@@ -17,7 +17,7 @@ class PosterIconsBox extends StatelessWidget {
           }),
           const PlayButton(),
           iconBox(title: "Info", iconPath: "assets/images/icons/info.svg", onTap: (){
-            customBottomSheet(context: context);
+           // customBottomSheet(context: context);
           }),
         ],
       ),

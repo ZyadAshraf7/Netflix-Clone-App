@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/presentation/widgets/bottom_sheet.dart';
@@ -28,7 +30,18 @@ class MoviesBox extends StatelessWidget {
           child: InkWell(
             onTap: () {
               //TODO: press on image to go to movie details
-              Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen, arguments: arguments);
+              //Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen, arguments: arguments);
+              final id = arguments as String;
+              final movie = BlocProvider.of<GetAllMoviesDataCubit>(context).findMovieById(id);
+              customBottomSheet(
+                context: context,
+                movie: movie,
+                navigateFunction: () => Navigator.of(context).pushNamed(
+                  RouteNames.movieDetailsScreen,
+                  arguments: arguments,
+                ),
+              );
+              print(movie.name);
               //customBottomSheet(context: context);
             },
             child: Hero(

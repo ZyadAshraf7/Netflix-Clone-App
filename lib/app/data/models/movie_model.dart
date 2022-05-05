@@ -6,6 +6,7 @@ class MovieModel {
   String? director;
   String? image;
   String? releaseYear;
+  String? releaseDate;
   String? runtime;
   String? age;
   String? trailer;
@@ -21,6 +22,7 @@ class MovieModel {
       this.director,
       this.image,
       this.releaseYear,
+      this.releaseDate,
       this.runtime,
       this.age,
       this.trailer,
@@ -35,6 +37,7 @@ class MovieModel {
     director = json['director'];
     image = json['image'];
     releaseYear = json['releaseYear'];
+    releaseDate = json['releaseDate']??"";
     runtime = json['runtime']??"";
     age = json['age'];
     trailer = json['trailer'];

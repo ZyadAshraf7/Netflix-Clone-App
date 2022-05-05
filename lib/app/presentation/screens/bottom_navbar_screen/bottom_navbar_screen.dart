@@ -16,7 +16,7 @@ class BottomNavBarScreen extends StatelessWidget {
         return Scaffold(
           body: bottomNavBarCubit.screens[bottomNavBarCubit.currentIndex],
           bottomNavigationBar: Container(
-            padding: EdgeInsets.only(bottom: 5,top: 1),
+            padding: const EdgeInsets.only(bottom: 5,top: 1),
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
@@ -48,7 +48,7 @@ class BottomNavBarScreen extends StatelessWidget {
                     ),
                   ),
                   BottomNavigationBarItem(
-                    label: 'Coming Soon',
+                    label: 'New & Hot',
                     icon: BottomNavIcon(
                       iconPath: 'assets/images/icons/coming-soon.svg',
                       isSelected: bottomNavBarCubit.currentIndex == 2,

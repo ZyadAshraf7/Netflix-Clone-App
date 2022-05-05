@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:netflix_app/app/presentation/screens/authentications/screens/email_verfifcation_screen.dart';
 import 'package:netflix_app/app/presentation/screens/authentications/screens/login_screen.dart';
 import 'package:netflix_app/app/presentation/screens/authentications/screens/register_screen.dart';
+import 'package:netflix_app/app/presentation/screens/coming_soon_screen/coming_soon_screen.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/home_screen.dart';
 import 'package:netflix_app/app/presentation/screens/search_screen/search_screen.dart';
 
@@ -17,8 +18,9 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   List <Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
+     ComingSoonScreen(),
     const RegisterScreen(),
-    const EmailVerificationScreen(),
+
   ];
   void navigateScreens(int index){
     currentIndex=index;

@@ -48,6 +48,9 @@ dependencies:
   chewie:
   auto_orientation: ^2.2.1
   cached_network_image: ^3.2.0
+  dio: ^4.0.6
+  path_provider: ^2.0.9
+  visibility_detector: ^0.2.2
   #better_player: ^0.0.81
 
 dev_dependencies:
