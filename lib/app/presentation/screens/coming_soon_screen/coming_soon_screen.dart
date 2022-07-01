@@ -89,7 +89,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
                             color: Colors.transparent,
                             child: ListView.separated(
                               separatorBuilder: (context, _) {
-                                return const SizedBox(height: 14);
+                                return const SizedBox(height: 18);
                               },
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -123,17 +123,17 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
+                                    //const SizedBox(width: 10),
                                     Column(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
-                                          width: size.width * 0.75,
-                                          height: 180,
+                                          width: size.width * 0.82,
+                                          height: 200,
                                           child: MovieVideoPlayer(
-                                            //isVisible: isVisible,
+                                            isComingSoon: true,
                                             autoPlay: false,
                                             showOptions: false,
                                             allowFullScreen: false,
@@ -146,7 +146,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18,
+                                            fontSize: 20,
                                           ),
                                         ),
                                         const SizedBox(height: 9),
@@ -156,14 +156,14 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
                                             movies.comingSoonMoviesData[i].description!,
                                             style: TextStyle(
                                               color: Colors.grey[400],
-                                              fontSize: 14,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ),
                                         const SizedBox(height: 11),
                                         Text(
                                           movies.comingSoonMoviesData[i].genres!.join(" . "),
-                                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14, overflow: TextOverflow.ellipsis),
+                                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, overflow: TextOverflow.ellipsis),
                                         ),
                                       ],
                                     ),

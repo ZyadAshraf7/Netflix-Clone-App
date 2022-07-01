@@ -77,7 +77,7 @@ class MovieDetailsScreen extends StatelessWidget {
                           imageUrl: movie.image!,
                           fit: BoxFit.cover,
                           placeholder: (context,_){
-                            return ContainerShimmer();
+                            return const ContainerShimmer();
                           },
                         ),
                       ),
@@ -86,7 +86,7 @@ class MovieDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   MovieInfoBox(age: movie.age!,releaseYear: movie.releaseYear!,movieDuration: movie.runtime!,),
                   const SizedBox(height: 12),
-                  MovieDetailsButtons(trailerPath: movie.trailer!,),
+                  MovieDetailsButtons(movie: movie,),
                 ],
               ),
             ],

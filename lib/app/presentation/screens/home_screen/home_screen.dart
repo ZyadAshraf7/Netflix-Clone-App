@@ -12,6 +12,7 @@ import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_po
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/coming_soon_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/netflix_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/popular_movies.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/top10_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/trending_now_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                          "Previews",
+                          "Top 10 TV Shows in Egypt Today",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
@@ -99,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 13),
                       const PreviewsAvatars(),
+                      //const Top10Movies(),
                       const SizedBox(height: 19),
                       //MoviesShimmer(),
                       //NetflixMovies(),

@@ -6,12 +6,12 @@ import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:video_player/video_player.dart';
 
 class MovieVideoPlayer extends StatefulWidget {
-  MovieVideoPlayer({Key? key, required this.trailerPath,this.autoPlay,this.allowFullScreen,this.showOptions,/*this.isVisible*/}) : super(key: key);
+  MovieVideoPlayer({Key? key, required this.trailerPath,this.autoPlay,this.allowFullScreen,this.showOptions,this.isComingSoon}) : super(key: key);
   final String trailerPath;
   bool ?autoPlay;
   bool ? allowFullScreen;
   bool ? showOptions;
-  //bool ? isVisible;
+  bool ? isComingSoon;
 
   @override
   _MovieVideoPlayerState createState() => _MovieVideoPlayerState();
@@ -27,7 +27,11 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
     super.initState();
     controller = VideoPlayerController.network(widget.trailerPath)
       ..initialize().then((value) {
-        controller.play();
+        if(widget.isComingSoon??false) {
+          controller.pause();
+        }else{
+          controller.play();
+        }
         setState(() {
           loading = false;
         });
@@ -38,10 +42,12 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
         autoPlay: widget.autoPlay??true,
         allowFullScreen: widget.allowFullScreen??true,
         //showControls: widget.showControls??true,
+
         showOptions: widget.showOptions??true,
         materialProgressColors: ChewieProgressColors(
           playedColor: AppTheme.redPrimaryColor,
           handleColor: Colors.white,
+          bufferedColor: Colors.white54,
         ),
         errorBuilder: (context, errorMessage) {
           return Center(
@@ -57,7 +63,7 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
             builder: (BuildContext context, Widget? child) {
               return VideoScaffold(
                 child: Scaffold(
-                  resizeToAvoidBottomInset: false,
+                  //resizeToAvoidBottomInset: false,
                   body: Container(
                     alignment: Alignment.center,
                     color: Colors.black,
@@ -120,7 +126,7 @@ class _VideoScaffoldState extends State<VideoScaffold> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    AutoOrientation.portraitAutoMode();
+    //AutoOrientation.portraitAutoMode();
     super.dispose();
   }
 

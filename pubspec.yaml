@@ -50,6 +50,8 @@ dependencies:
   cached_network_image: ^3.2.0
   dio: ^4.0.6
   path_provider: ^2.0.9
+  flutter_downloader: ^1.7.4
+  permission_handler: ^10.0.0
   visibility_detector: ^0.2.2
   #better_player: ^0.0.81
 
