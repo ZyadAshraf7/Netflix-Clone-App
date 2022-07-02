@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:netflix_app/app/core/constants/strings.dart';
 import 'package:http/http.dart' as http;
 class TrendingNowMoviesRepository{

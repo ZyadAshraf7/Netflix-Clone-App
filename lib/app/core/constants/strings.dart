@@ -8,9 +8,10 @@ class Strings{
   static const refreshToken ="https://securetoken.googleapis.com/v1/token?key=$firebaseApiKey";
   static const getMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/netflixMovies/allMovies.json";
   static const getComingSoonMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/comingSoon/comingSoon.json";
-  static const getAllDataMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/allDataMovies/allDataMovies/allDataMovies.json";
+  static const getAllDataMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/allDataMovies/allDataMovies.json";
   static const getTrendingNowMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/trendingNow.json";
   static const getPopularMovies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/popularMovies/popularMovies.json";
+  static const getTop10Movies = "https://netflix-bfc7b-default-rtdb.firebaseio.com/top10Movies.json";
 }
 const firebaseApiKey= "AIzaSyBtrUvMWv-L6u49pPM1yjTNi7n--kAOAwA";
 const sharedTokenId = "token";

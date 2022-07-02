@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/ger_top_10_movies/get_top10_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/coming_soon_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
@@ -16,7 +17,7 @@ import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_list_view/trending_now_movies.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
-import 'package:netflix_app/app/presentation/screens/home_screen/widgets/previews_avatars.dart';
+import 'package:netflix_app/app/presentation/screens/home_screen/widgets/top10_movies_box.dart';
 import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
 import 'widgets/movies_box.dart';
 
@@ -51,6 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
     if (BlocProvider.of<GetPopularMoviesCubit>(context).popularMoviesData.isEmpty) {
       BlocProvider.of<GetPopularMoviesCubit>(context).fetchPopularMovies();
     }
+    if (BlocProvider.of<GetTop10MoviesCubit>(context).top10MoviesData.isEmpty) {
+      BlocProvider.of<GetTop10MoviesCubit>(context).fetchTop10Movies();
+    }
     scrollController = ScrollController()
       ..addListener(() {
         setState(() {
@@ -84,26 +88,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const HomePoster(),
-                      //PosterShimmer(),
                       const SizedBox(height: 13),
-
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(
-                          "Top 10 TV Shows in Egypt Today",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 13),
-                      const PreviewsAvatars(),
-                      //const Top10Movies(),
+                      BlocBuilder<GetTop10MoviesCubit,GetTop10MoviesState>(builder: (context,state){
+                        if (state is GetTop10MoviesLoading){
+                          return const MoviesShimmer();
+                        }
+                        else if(state is GetTop10MoviesLoadedSuccess){
+                          return const Top10MoviesBox();
+                        }else{
+                          return const Text("Error");
+                        }
+                      }),
                       const SizedBox(height: 19),
-                      //MoviesShimmer(),
-                      //NetflixMovies(),
                       BlocBuilder<GetMoviesCubit, GetMoviesState>(
                         builder: (context, state) {
                           if (state is GetMoviesLoading) {
@@ -121,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           } else if(state is ComingSoonMoviesLoadedSuccess) {
                             return const ComingSoonMovies();
                           }else{
-                            return Text("Error");
+                            return const Text("Error");
                           }
                         },
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/auth/register_cubit/register_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/ger_top_10_movies/get_top10_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_all_movies_data/get_all_movies_data_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/coming_soon_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:netflix_app/app/data/repositories/get_all_movies_data/get_all_mo
 import 'package:netflix_app/app/data/repositories/get_coming_soon_movies/get_comingSoonMovies.dart';
 import 'package:netflix_app/app/data/repositories/get_movies_data/get_movies_data.dart';
 import 'package:netflix_app/app/data/repositories/get_popular_Movies/get_popular_Movies_repository.dart';
+import 'package:netflix_app/app/data/repositories/get_top_10_movies/get_top_10_movies.dart';
 import 'package:netflix_app/app/data/repositories/get_trending_now_movies/get_trending_now_movies.dart';
 import 'package:netflix_app/app/data/repositories/get_user_data/user_data_repository.dart';
 import 'package:netflix_app/app/data/shared_preference/user_preference.dart';
@@ -52,6 +54,9 @@ class NetflixApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetPopularMoviesCubit(popularMoviesRepository : PopularMoviesRepository()),
+        ),
+        BlocProvider(
+          create: (context) => GetTop10MoviesCubit(top10MoviesRepository: Top10MoviesRepository()),
         ),
       ],
       child: GestureDetector(
