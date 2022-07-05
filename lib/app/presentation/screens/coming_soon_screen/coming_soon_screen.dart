@@ -25,7 +25,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen> {
     _scrollController=ScrollController()..addListener(() {
       setState(() {
         scrollOffset=_scrollController.offset;
-        print("scroll offset: $scrollOffset");
+        //print("scroll offset: $scrollOffset");
         if((scrollOffset>0&&scrollOffset<230)||(scrollOffset>230&&scrollOffset<460)){
           isVisible=true;
         }
