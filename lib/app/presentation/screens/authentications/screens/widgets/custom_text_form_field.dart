@@ -49,7 +49,7 @@ class CustomTextFormField extends StatelessWidget {
                 color: AppTheme.midGreyColor,
                 fontSize: 15
               ),
-              contentPadding: const EdgeInsets.only(left:20 ,top: 5),
+              contentPadding: const EdgeInsets.symmetric(horizontal:20 ,vertical: 5),
               border: InputBorder.none,
               errorBorder: InputBorder.none,
               focusedBorder: InputBorder.none,

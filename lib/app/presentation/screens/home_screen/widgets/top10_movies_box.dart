@@ -28,16 +28,18 @@ class Top10MoviesBox extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 14),
         SizedBox(
           height: 190,
           child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 5),
             separatorBuilder: (context, i) {
               return const SizedBox(width: 2);
             },
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, i) {
-              return InkWell(
+              return GestureDetector(
                 onTap: () {
                   customBottomSheet(
                     context: context,
@@ -62,7 +64,8 @@ class Top10MoviesBox extends StatelessWidget {
                               filterQuality: FilterQuality.high,
                               imageUrl: top10Movies[i].image!,
                               width: 130,
-                              //height: 170,
+                              fit: BoxFit.cover,
+                              height: 190,
                               placeholder: (context, _) {
                                 return SizedBox(
                                   child: Padding(

@@ -7,6 +7,7 @@ import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movie
 import 'package:netflix_app/app/buinsness_logic/cubits/get_popular_movies/get_popular_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_trending_now_movies/get_trending_now_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/user_movies_list/user_movies_list_cubit.dart';
 import 'package:netflix_app/app/core/theme/app_theme.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/app_bar.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/home_poster.dart';
@@ -54,6 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (BlocProvider.of<GetTop10MoviesCubit>(context).top10MoviesData.isEmpty) {
       BlocProvider.of<GetTop10MoviesCubit>(context).fetchTop10Movies();
+    }
+    if (BlocProvider.of<UserMoviesListCubit>(context).userMoviesList.isEmpty) {
+      BlocProvider.of<UserMoviesListCubit>(context).fetchUserMoviesList();
     }
     scrollController = ScrollController()
       ..addListener(() {

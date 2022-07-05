@@ -47,20 +47,20 @@ class MovieModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = id;
     data['name'] = name;
     data['description'] = description;
     data['starring'] = starring;
     data['director'] = director;
     data['image'] = image;
-    data['releaseYear'] = releaseYear;
-    data['runtime'] = runtime;
+    data['releaseYear'] = releaseYear??"";
+    data['runtime'] = runtime??"";
     data['age'] = age;
     data['trailer'] = trailer;
     data['genres'] = genres;
-    data['totalViews'] = totalViews;
-    data['weeklyViews'] = weeklyViews;
+    data['totalViews'] = totalViews??0;
+    data['weeklyViews'] = weeklyViews??0;
     return data;
   }
 }

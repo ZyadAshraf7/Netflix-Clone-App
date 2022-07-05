@@ -1,14 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:netflix_app/app/data/models/movie_model.dart';
+import 'package:netflix_app/app/data/shared_preference/user_preference.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/icon_box.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_video_player.dart';
 import 'package:netflix_app/app/presentation/widgets/custom_button.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../buinsness_logic/cubits/user_movies_list/user_movies_list_cubit.dart';
+
 Future customBottomSheet({required BuildContext context, required MovieModel movie, required VoidCallback navigateFunction}) {
+
   return showModalBottomSheet(
     isScrollControlled: true,
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -26,43 +32,43 @@ Future customBottomSheet({required BuildContext context, required MovieModel mov
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(3),
-                  child:CachedNetworkImage(
-                    maxHeightDiskCache: 500,
-                    maxWidthDiskCache: 500,
-                    filterQuality: FilterQuality.high,
-                    imageUrl: movie.image!,
-                    width: 130,
-                    height: 170,
-                    fit: BoxFit.cover,
-                    placeholder: (context, _) {
-                      return SizedBox(
-                        child: Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Shimmer.fromColors(
-                            baseColor: Colors.grey[100]!,
-                            highlightColor: Colors.grey[200]!,
-                            child: SvgPicture.asset(
-                              "assets/images/icons/netflix-n.svg",
-                              //color: AppTheme.redPrimaryColor.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(3),
+                    child: CachedNetworkImage(
+                      maxHeightDiskCache: 500,
+                      maxWidthDiskCache: 500,
+                      filterQuality: FilterQuality.high,
+                      imageUrl: movie.image!,
+                      width: 130,
+                      height: 170,
+                      fit: BoxFit.cover,
+                      placeholder: (context, _) {
+                        return SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(50.0),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey[100]!,
+                              highlightColor: Colors.grey[200]!,
+                              child: SvgPicture.asset(
+                                "assets/images/icons/netflix-n.svg",
+                                //color: AppTheme.redPrimaryColor.withOpacity(0.6),
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  )
-                  /*Image.network(
+                        );
+                      },
+                    )
+                    /*Image.network(
                     movie.image!,
                     height: 120,
                   ),*/
-                ),
+                    ),
                 const SizedBox(width: 6),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width-155,
+                      width: MediaQuery.of(context).size.width - 155,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,7 +121,7 @@ Future customBottomSheet({required BuildContext context, required MovieModel mov
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 128,
-                      width: MediaQuery.of(context).size.width-155,
+                      width: MediaQuery.of(context).size.width - 155,
                       child: Text(
                         movie.description!,
                         style: const TextStyle(color: Colors.white, fontSize: 14, overflow: TextOverflow.ellipsis),
@@ -165,7 +171,22 @@ Future customBottomSheet({required BuildContext context, required MovieModel mov
                 const SizedBox(width: 30),
                 iconBox(title: "Download", iconPath: "assets/images/icons/download.svg", onTap: () {}),
                 const SizedBox(width: 42),
-                iconBox(title: "Download", iconPath: "assets/images/icons/download.svg", onTap: () {})
+                BlocBuilder<UserMoviesListCubit, UserMoviesListState>(
+                  builder: (context, state) {
+                    final userMoviesListCubit = BlocProvider.of<UserMoviesListCubit>(context);
+                    return iconBox(
+                    title: "My List",
+                    iconPath:
+                        userMoviesListCubit.checkIfMovieExist(movie) ?"assets/images/icons/addedToList.svg": "assets/images/icons/plus.svg",
+                    onTap: () {
+                      if(!userMoviesListCubit.checkIfMovieExist(movie)) {
+                        userMoviesListCubit.addMovieToList(movie);
+                      }else{
+                        userMoviesListCubit.removeMovieFromList(movie);
+                      }
+                    });
+                  },
+                )
               ],
             ),
             const SizedBox(height: 10),

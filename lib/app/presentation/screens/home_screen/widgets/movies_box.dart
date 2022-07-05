@@ -24,27 +24,28 @@ class MoviesBox extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 14),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(2),
-          child: InkWell(
-            onTap: () {
-              //TODO: press on image to go to movie details
-              //Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen, arguments: arguments);
-              final id = arguments as String;
-              final movie = BlocProvider.of<GetAllMoviesDataCubit>(context).findMovieById(id);
-              customBottomSheet(
-                context: context,
-                movie: movie,
-                navigateFunction: () => Navigator.of(context).pushNamed(
-                  RouteNames.movieDetailsScreen,
-                  arguments: arguments,
-                ),
-              );
-              print(movie.name);
-              //customBottomSheet(context: context);
-            },
-            child: Hero(
+        //const SizedBox(height: 14),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: InkWell(
+              onTap: () {
+                //TODO: press on image to go to movie details
+                //Navigator.of(context).pushNamed(RouteNames.movieDetailsScreen, arguments: arguments);
+                final id = arguments as String;
+                final movie = BlocProvider.of<GetAllMoviesDataCubit>(context).findMovieById(id);
+                customBottomSheet(
+                  context: context,
+                  movie: movie,
+                  navigateFunction: () => Navigator.of(context).pushNamed(
+                    RouteNames.movieDetailsScreen,
+                    arguments: arguments,
+                  ),
+                );
+                print(movie.name);
+                //customBottomSheet(context: context);
+              },
+              child: Hero(
                 tag: arguments,
                 transitionOnUserGestures: true,
                 child: CachedNetworkImage(
@@ -70,14 +71,9 @@ class MoviesBox extends StatelessWidget {
                       ),
                     );
                   },
-                )
-                /*Image.network(
-                    imagePath,
-                    width: 130,
-                    height: 170,
-                    fit: BoxFit.cover,
-                  ),*/
                 ),
+              ),
+            ),
           ),
         ),
       ],

@@ -20,6 +20,7 @@ import 'package:netflix_app/app/presentation/screens/bottom_navbar_screen/bottom
 import 'package:netflix_app/app/presentation/screens/home_screen/home_screen.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/movie_details_screen.dart';
 import 'package:netflix_app/app/presentation/screens/profile_screen/profile_screen.dart';
+import 'package:netflix_app/app/presentation/screens/user_movies_list_screen/user_movies_list_screen.dart';
 
 class AppRouter {
   late RegisterRepository registerRepository;
@@ -84,6 +85,10 @@ class AppRouter {
       case RouteNames.userProfile:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
+        );
+      case RouteNames.userMoviesListScreen:
+        return MaterialPageRoute(
+          builder: (_) => const UserMoviesScreen(),
         );
     }
   }

@@ -24,9 +24,11 @@ class ComingSoonMovies extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 14),
         SizedBox(
           height: 190,
           child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 5),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,

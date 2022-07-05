@@ -18,6 +18,7 @@ import 'package:netflix_app/app/data/repositories/get_user_data/user_data_reposi
 import 'package:netflix_app/app/data/shared_preference/user_preference.dart';
 
 import 'app/buinsness_logic/cubits/get_user_data/get_user_data_cubit.dart';
+import 'app/buinsness_logic/cubits/user_movies_list/user_movies_list_cubit.dart';
 import 'app/core/constants/route_names.dart';
 import 'app/core/theme/app_theme.dart';
 import 'app/presentation/routing/app_router.dart';
@@ -57,6 +58,9 @@ class NetflixApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetTop10MoviesCubit(top10MoviesRepository: Top10MoviesRepository()),
+        ),
+        BlocProvider(
+          create: (context) => UserMoviesListCubit(),
         ),
       ],
       child: GestureDetector(
