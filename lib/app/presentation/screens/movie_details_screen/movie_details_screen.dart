@@ -10,6 +10,7 @@ import 'package:netflix_app/app/core/constants/route_names.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_box.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_details_buttons.dart';
 import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/movie_text_details.dart';
+import 'package:netflix_app/app/presentation/screens/movie_details_screen/widgets/similar_movies.dart';
 import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
 import 'package:netflix_app/app/presentation/widgets/custom_button.dart';
 
@@ -100,8 +101,9 @@ class MovieDetailsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           MovieTextDetails(description: movie.description!,director: movie.director!,starring: movie.starring!),
-          const SizedBox(height: 22),
+          const SizedBox(height: 26),
            //const MoviesBox(title: "Related Movies")
+          SimilarMovies()
         ],
       ),
     );
