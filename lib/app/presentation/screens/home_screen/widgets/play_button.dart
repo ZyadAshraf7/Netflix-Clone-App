@@ -16,12 +16,12 @@ class PlayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-         FirebaseAuth.instance.signOut();
+         /*FirebaseAuth.instance.signOut();
          GoogleSignIn().disconnect();
          BlocProvider.of<GetUserDataCubit>(context).userModel = null;
          UserPreferences.setUserToken("");
          BlocProvider.of<UserMoviesListCubit>(context).userMoviesList.clear();
-        Navigator.pushReplacementNamed(context, RouteNames.loginScreen);
+        Navigator.pushReplacementNamed(context, RouteNames.loginScreen);*/
       },
       child: Container(
         height: 40,
