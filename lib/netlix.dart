@@ -7,6 +7,7 @@ import 'package:netflix_app/app/buinsness_logic/cubits/get_coming_soon_movies/co
 import 'package:netflix_app/app/buinsness_logic/cubits/get_movies_data/get_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_popular_movies/get_popular_movies_cubit.dart';
 import 'package:netflix_app/app/buinsness_logic/cubits/get_trending_now_movies/get_trending_now_movies_cubit.dart';
+import 'package:netflix_app/app/buinsness_logic/cubits/home_poster/home_poster_cubit.dart';
 import 'package:netflix_app/app/data/repositories/authentication/register_repository.dart';
 import 'package:netflix_app/app/data/repositories/get_all_movies_data/get_all_movies_data.dart';
 import 'package:netflix_app/app/data/repositories/get_coming_soon_movies/get_comingSoonMovies.dart';
@@ -61,6 +62,9 @@ class NetflixApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserMoviesListCubit(),
+        ),
+        BlocProvider(
+          create: (context) => HomePosterCubit(),
         ),
       ],
       child: GestureDetector(

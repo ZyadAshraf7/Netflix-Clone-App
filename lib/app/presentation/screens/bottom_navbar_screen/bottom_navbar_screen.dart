@@ -54,13 +54,13 @@ class BottomNavBarScreen extends StatelessWidget {
                       isSelected: bottomNavBarCubit.currentIndex == 2,
                     ),
                   ),
-                  BottomNavigationBarItem(
+                  /*BottomNavigationBarItem(
                     label: 'Downloads',
                     icon: BottomNavIcon(
                       iconPath: 'assets/images/icons/download.svg',
                       isSelected: bottomNavBarCubit.currentIndex == 3,
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),

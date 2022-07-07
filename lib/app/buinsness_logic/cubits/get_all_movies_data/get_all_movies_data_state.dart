@@ -8,3 +8,4 @@ class GetAllMoviesDataLoading extends GetAllMoviesDataState {}
 class GetAllMoviesDataLoadedSuccess extends GetAllMoviesDataState {}
 class GetAllMoviesDataError extends GetAllMoviesDataState {}
 
+

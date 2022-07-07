@@ -20,6 +20,7 @@ import 'package:netflix_app/app/presentation/screens/home_screen/widgets/movies_
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/poster_shimmer.dart';
 import 'package:netflix_app/app/presentation/screens/home_screen/widgets/top10_movies_box.dart';
 import 'package:netflix_app/app/presentation/widgets/container_shimmer.dart';
+import '../../../buinsness_logic/cubits/home_poster/home_poster_cubit.dart';
 import 'widgets/movies_box.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    if(BlocProvider.of<GetUserDataCubit>(context).userModel==null){
+    if (BlocProvider.of<HomePosterCubit>(context).posterMovie == null) {
+      BlocProvider.of<HomePosterCubit>(context).setPosterMovie();
+    }
+    if (BlocProvider.of<GetUserDataCubit>(context).userModel == null) {
       BlocProvider.of<GetUserDataCubit>(context).getUserData();
     }
     if (BlocProvider.of<GetMoviesCubit>(context).moviesData.isEmpty) {
@@ -58,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (BlocProvider.of<UserMoviesListCubit>(context).userMoviesList.isEmpty) {
       BlocProvider.of<UserMoviesListCubit>(context).fetchUserMoviesList();
+
     }
     scrollController = ScrollController()
       ..addListener(() {
@@ -91,15 +96,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const HomePoster(),
+                      BlocBuilder<HomePosterCubit, HomePosterState>(
+                        builder: (context, state) {
+                          if(state is SetHomePosterLoading) {
+                            return Center(child: CircularProgressIndicator());
+                          }else if (state is SetHomePosterLoadedSuccess) {
+                            return HomePoster();
+                          }else{
+                            return Text("Error");
+                          }
+                        },
+                      ),
                       const SizedBox(height: 13),
-                      BlocBuilder<GetTop10MoviesCubit,GetTop10MoviesState>(builder: (context,state){
-                        if (state is GetTop10MoviesLoading){
+                      BlocBuilder<GetTop10MoviesCubit, GetTop10MoviesState>(builder: (context, state) {
+                        if (state is GetTop10MoviesLoading) {
                           return const MoviesShimmer();
-                        }
-                        else if(state is GetTop10MoviesLoadedSuccess){
+                        } else if (state is GetTop10MoviesLoadedSuccess) {
                           return const Top10MoviesBox();
-                        }else{
+                        } else {
                           return const Text("Error");
                         }
                       }),
@@ -118,9 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, state) {
                           if (state is ComingSoonMoviesLoading) {
                             return const MoviesShimmer();
-                          } else if(state is ComingSoonMoviesLoadedSuccess) {
+                          } else if (state is ComingSoonMoviesLoadedSuccess) {
                             return const ComingSoonMovies();
-                          }else{
+                          } else {
                             return const Text("Error");
                           }
                         },
@@ -130,9 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, state) {
                           if (state is GetTrendingNowMoviesLoading) {
                             return const MoviesShimmer();
-                          } else if(state is GetTrendingNowMoviesLoadedSuccess) {
+                          } else if (state is GetTrendingNowMoviesLoadedSuccess) {
                             return const TrendingNowMovies();
-                          }else{
+                          } else {
                             return Text("Error");
                           }
                         },
@@ -142,9 +156,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, state) {
                           if (state is GetPopularMoviesLoading) {
                             return const MoviesShimmer();
-                          } else if(state is GetPopularMoviesLoadedSuccess) {
+                          } else if (state is GetPopularMoviesLoadedSuccess) {
                             return const PopularMovies();
-                          }else{
+                          } else {
                             return Text("Error");
                           }
                         },
