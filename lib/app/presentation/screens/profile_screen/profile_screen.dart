@@ -110,7 +110,9 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 ProfileIconBox(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, RouteNames.aboutApp);
+                  },
                   iconPath: "assets/images/icons/info.svg",
                   title: "About the App",
                 ),

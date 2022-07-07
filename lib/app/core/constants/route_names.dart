@@ -9,4 +9,5 @@ class RouteNames {
   static const String forgetPasswordScreen = "/forgetPasswordScreen";
   static const String userProfile = "/userProfile";
   static const String userMoviesListScreen = "/userMoviesList";
+  static const String aboutApp = "/aboutApp";
 }
