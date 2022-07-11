@@ -99,11 +99,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<HomePosterCubit, HomePosterState>(
                         builder: (context, state) {
                           if(state is SetHomePosterLoading) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: PosterShimmer());
                           }else if (state is SetHomePosterLoadedSuccess) {
-                            return HomePoster();
+                            return const HomePoster();
                           }else{
-                            return Text("Error");
+                            return const Text("Error");
                           }
                         },
                       ),

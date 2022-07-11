@@ -70,6 +70,7 @@ Future customBottomSheet({required BuildContext context, required MovieModel mov
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 155,
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -120,12 +121,13 @@ Future customBottomSheet({required BuildContext context, required MovieModel mov
                     ),
                     const SizedBox(height: 8),
                     SizedBox(
-                      height: 128,
                       width: MediaQuery.of(context).size.width - 155,
                       child: Text(
                         movie.description!,
                         style: const TextStyle(color: Colors.white, fontSize: 14, overflow: TextOverflow.ellipsis),
                         maxLines: 6,
+                        softWrap: true,
+
                       ),
                     ),
                   ],
@@ -141,6 +143,7 @@ Future customBottomSheet({required BuildContext context, required MovieModel mov
                   height: 30,
                   color: Colors.white,
                   function: () {
+                    //Navigator.of(context).pop();
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => MovieVideoPlayer(

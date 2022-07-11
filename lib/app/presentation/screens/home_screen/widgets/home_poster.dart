@@ -14,28 +14,19 @@ class HomePoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     final posterCubit = BlocProvider.of<HomePosterCubit>(context);
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        BlocBuilder<HomePosterCubit, HomePosterState>(
-          builder: (context, state) {
-            if(state is SetHomePosterLoading) {
-              return CircularProgressIndicator();
-            }
-            return SizedBox(
-              width: size.width,
-              height: 600,
-              child: Image.network(
-                posterCubit.posterMovie!.image!,
-                fit: BoxFit.cover,
-              ),
-            );
-          },
+        SizedBox(
+          width: size.width,
+          height: 600,
+          child: Image.network(
+            posterCubit.posterMovie!.image!,
+            fit: BoxFit.cover,
+          ),
         ),
         Container(
           height: 100,

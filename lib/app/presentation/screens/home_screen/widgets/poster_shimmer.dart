@@ -7,39 +7,43 @@ class PosterShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 100),
-          Shimmer.fromColors(
-            child: Column(
-              children: const [
-                ContainerShimmer(
-                  height: 130,
-                  width: 280,
-                  borderRadius: 7,
-                ),
-                SizedBox(height: 20),
-                ContainerShimmer(
-                  height: 30,
-                  width: 330,
-                  borderRadius: 3,
-                ),
-                SizedBox(height: 20),
-                ContainerShimmer(
-                  height: 40,
-                  width: 90,
-                  borderRadius: 5,
-                ),
-              ],
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade900,
+      highlightColor: Colors.grey.shade800.withAlpha(60),
+      child: SizedBox(
+        height: 600,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 100),
+            Shimmer.fromColors(
+              child: Column(
+                children: const [
+                  ContainerShimmer(
+                    height: 130,
+                    width: 280,
+                    borderRadius: 7,
+                  ),
+                  SizedBox(height: 20),
+                  ContainerShimmer(
+                    height: 30,
+                    width: 330,
+                    borderRadius: 3,
+                  ),
+                  SizedBox(height: 20),
+                  ContainerShimmer(
+                    height: 40,
+                    width: 90,
+                    borderRadius: 5,
+                  ),
+                ],
+              ),
+              baseColor: Colors.grey.shade900,
+              highlightColor: Colors.grey.shade800.withAlpha(60),
             ),
-            baseColor: Colors.grey.shade900,
-            highlightColor: Colors.grey.shade800.withAlpha(60),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -81,13 +81,14 @@ class RegisterScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        const SizedBox(height: 16),
                         SvgPicture.asset(
                           "assets/images/NetflixLogo.svg",
                           height: 70,
                           width: 272,
                           color: AppTheme.redPrimaryColor,
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 10),
                         const Text(
                           "Signup",
                           style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
@@ -100,7 +101,7 @@ class RegisterScreen extends StatelessWidget {
                           isPasswordField: false,
                           textEditingController: registerCubit.emailController,
                         ),
-                        const SizedBox(height: 17),
+                        const SizedBox(height: 10),
                         CustomTextFormField(
                           focusNode: registerCubit.passwordFocusNode,
                           hintText: "Password",
@@ -120,20 +121,7 @@ class RegisterScreen extends StatelessWidget {
                           textEditingController: registerCubit.rePasswordController,
                           changePasswordVisibility: registerCubit.changeRePasswordVisibility,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 35),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "Forgot Password ?",
-                                style: TextStyle(fontSize: 13, color: AppTheme.greyColor),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 14),
+                        const SizedBox(height: 35),
                         state is RegisterLoading
                             ? const CircularProgressIndicator(
                                 color: AppTheme.redPrimaryColor,
@@ -160,11 +148,11 @@ class RegisterScreen extends StatelessWidget {
                                   style: TextStyle(fontSize: 26, color: Colors.white, fontWeight: FontWeight.bold),
                                 ),
                               ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 17),
                         separator(),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 17),
                         const SocialMediaLogin(),
-                        const SizedBox(height: 35),
+                        const SizedBox(height: 17),
                         doesHaveAccount(
                           title: "Already Have An Account?  ",
                           subtitle: "Login",

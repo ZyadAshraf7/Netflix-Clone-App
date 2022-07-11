@@ -42,7 +42,12 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
         autoPlay: widget.autoPlay??true,
         allowFullScreen: widget.allowFullScreen??true,
         //showControls: widget.showControls??true,
-
+        deviceOrientationsAfterFullScreen: [
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ],
         showOptions: widget.showOptions??true,
         materialProgressColors: ChewieProgressColors(
           playedColor: AppTheme.redPrimaryColor,
@@ -57,7 +62,7 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
             ),
           );
         },
-        routePageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondAnimation, provider) {
+        /*routePageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondAnimation, provider) {
           return AnimatedBuilder(
             animation: animation,
             builder: (BuildContext context, Widget? child) {
@@ -73,13 +78,34 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
               );
             },
           );
-        });
+        }*/);
+
+    chewieController.addListener(() {
+      if (chewieController.isFullScreen) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft,
+        ]);
+      } else {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+        ]);
+      }
+    });
   }
 
   @override
   void dispose() {
     controller.dispose();
     chewieController.pause();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     //chewieController.dispose();
     super.dispose();
   }
@@ -87,6 +113,8 @@ class _MovieVideoPlayerState extends State<MovieVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: null,
+      resizeToAvoidBottomInset: true,
       body: loading
           ? const Center(
               child: CircularProgressIndicator(
